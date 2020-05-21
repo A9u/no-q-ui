@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import { Form, Card, Input, CardBody, CardHeader } from "reactstrap";
+import { Form, Card, CardBody, CardHeader } from "reactstrap";
 import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import NqSelect from "core-components/NqSelect";
@@ -27,9 +27,20 @@ const RegisterForm = ({ submitHandler }) => {
       <CardBody>
         <div className="container-fluid">
           <Formik
-            initialValues={{}}
+            initialValues={{
+              name: "",
+              address: "",
+              city: "",
+              state: "",
+              pincode: "",
+              duration: 5,
+              opening_time: "09:00",
+              closing_time: "18:00",
+              available_days: [],
+            }}
             validationSchema={schema}
             onSubmit={(values) => {
+              alert("123");
               submitHandler(values);
             }}
           >
@@ -114,7 +125,6 @@ const RegisterForm = ({ submitHandler }) => {
                   id="opening_time"
                   type="time"
                   label="Opening Time"
-                  formText="09:00"
                   name="opening_time"
                   handleChange={handleChange}
                   onBlur={handleBlur}
@@ -125,7 +135,6 @@ const RegisterForm = ({ submitHandler }) => {
                   id="closing_time"
                   type="time"
                   label="Closing Time"
-                  formText="17:00"
                   name="closing_time"
                   handleChange={handleChange}
                   onBlur={handleBlur}
