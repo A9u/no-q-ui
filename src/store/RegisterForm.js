@@ -10,7 +10,7 @@ const RegisterForm = ({ submitHandler }) => {
   let schema = yup.object().shape({
     name: yup.string().required(),
     address: yup.string().required(),
-    city: yup.string().email(),
+    city: yup.string(),
     state: yup.string(),
     pincode: yup.string().required(),
     duration: yup.string().required(),
