@@ -113,7 +113,7 @@ const RegisterForm = ({ submitHandler }) => {
                 <NqInputV
                   id="pincode"
                   type="text"
-                  label="pincode"
+                  label="Pincode"
                   formText="416003"
                   name="pincode"
                   handleChange={handleChange}
