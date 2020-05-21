@@ -1,14 +1,17 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import RegisterForm from './store/RegisterForm';
+import RegisterFormContainer from "./store/RegisterFormContainer";
 
 const NqRoute = () => {
   return (
     <>
-      <Route exact path="/register"> <RegisterForm submitHandler={() => alert('form submmit')} /> </Route>
+      <Route exact path="/register">
+        {" "}
+        <RegisterFormContainer />
+      </Route>
     </>
-  )
-}
+  );
+};
 
 export default NqRoute;
