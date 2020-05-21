@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FormGroup, Label, Input, FormText, Col } from "reactstrap";
+import { FormGroup, Label, Input, Col } from "reactstrap";
 
-const NqInputV = (props) => {
+const NqOption = ({ options }) =>
+  options.map((option, index) => <option key={index}> {option}</option>);
+
+const NqSelect = (props) => {
   return (
     <FormGroup row>
       <Label for={props.id} md={props.labelMd || 2}>
@@ -10,20 +13,22 @@ const NqInputV = (props) => {
       </Label>
       <Col md={props.textMd || 6}>
         <Input
-          type={props.type}
+          type="select"
           name={props.name}
           id={props.id}
           placeholder={props.placeholder}
           onChange={props.handleChange}
           value={props.value}
-        />
-        <FormText>{props.formText}</FormText>
+          {...props}
+        >
+          <NqOption options={props.options} />
+        </Input>
       </Col>
     </FormGroup>
   );
 };
 
-NqInputV.propTypes = {
+NqSelect.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   formText: PropTypes.string,
@@ -32,4 +37,4 @@ NqInputV.propTypes = {
   handleChange: PropTypes.func,
 };
 
-export default NqInputV;
+export default NqSelect;
