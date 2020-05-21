@@ -1,8 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FormGroup, Label, Input, FormText, Col } from "reactstrap";
+import {
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Col,
+  FormFeedback,
+} from "reactstrap";
 
 const NqInputV = (props) => {
+  console.log(props);
   return (
     <FormGroup row>
       <Label for={props.id} md={props.labelMd || 2}>
@@ -16,7 +24,9 @@ const NqInputV = (props) => {
           placeholder={props.placeholder}
           onChange={props.handleChange}
           value={props.value}
+          invalid={!!props.error}
         />
+        <FormFeedback> {props.error}</FormFeedback>
         <FormText>{props.formText}</FormText>
       </Col>
     </FormGroup>
