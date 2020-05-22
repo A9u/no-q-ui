@@ -1,17 +1,17 @@
 import {
   REGISTER_STORE,
   SET_STORE_ERROR,
-  SET_SLOTS,
+  SET_STORE,
 } from "../constants/actionConstants";
 
 const reducer = (state = {}, action) => {
   console.log(action);
   console.log("inside reducer");
   switch (action.type) {
-    case SET_SLOTS:
+    case SET_STORE:
       return {
         ...state,
-        slots: action.payload.slots,
+        store: action.store,
         loading: false,
       };
     case SET_STORE_ERROR:

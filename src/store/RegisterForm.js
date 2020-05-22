@@ -72,7 +72,7 @@ const RegisterForm = ({ submitHandler }) => {
 
               NqSuccessNotification("Done Successfully");
               console.log(store);
-              submitHandler(values);
+              submitHandler(store);
               NqErrorNotification("Failed to submit");
             }}
           >

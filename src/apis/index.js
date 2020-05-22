@@ -3,7 +3,7 @@ export const PostApiCall = (url, body) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/vnd.no-q.com; version=1",
+      Accept: "application/no-q.com; version=1",
     },
     body: JSON.stringify(body),
   });

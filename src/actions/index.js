@@ -1,7 +1,7 @@
 import {
   REGISTER_STORE,
   SET_STORE_ERROR,
-  SET_SLOTS,
+  SET_STORE,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -9,9 +9,9 @@ export const registerStore = (store) => ({
   store: store,
 });
 
-export const setSlots = (slots) => ({
-  type: SET_SLOTS,
-  slots: slots,
+export const setStore = (store) => ({
+  type: SET_STORE,
+  store: store,
 });
 
 export const setStoreError = (error) => ({
