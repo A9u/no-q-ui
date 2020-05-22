@@ -5,6 +5,10 @@ import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import NqTagSelect from "core-components/NqTagSelect";
 import { WEEK_DAYS, CATEGORIES } from "constants/optionsConstants";
+import {
+  NqSuccessNotification,
+  NqErrorNotification,
+} from "core-components/NqNotification";
 
 import { NqButtonSubmit } from "core-components/NqButton";
 
@@ -44,7 +48,6 @@ const RegisterForm = ({ submitHandler }) => {
             }}
             validationSchema={schema}
             onSubmit={(values, { setSubmitting, setFieldError }) => {
-              console.log("values");
               let store = values;
               store.categories = store.categories.map(
                 (category) => category.value
@@ -52,8 +55,10 @@ const RegisterForm = ({ submitHandler }) => {
               store.available_days = store.available_days.map(
                 (day) => day.value
               );
+              NqSuccessNotification("Done Successfully");
               console.log(store);
               submitHandler(values);
+              NqErrorNotification("Failed to submit");
             }}
           >
             {({
