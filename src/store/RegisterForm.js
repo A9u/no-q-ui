@@ -13,7 +13,12 @@ import {
 import { NqButtonSubmit } from "core-components/NqButton";
 import { waitForElement } from "@testing-library/react";
 
-const RegisterForm = ({ submitHandler }) => {
+const RegisterForm = ({ submitHandler, categories }) => {
+  let optionCategories = categories.map((category) => ({
+    value: category.id,
+    label: category.code,
+  }));
+
   let schema = yup.object().shape({
     name: yup.string().required(),
     address: yup.string().required(),
@@ -55,13 +60,13 @@ const RegisterForm = ({ submitHandler }) => {
               capacity: 1,
               opening_time: "09:00",
               closing_time: "18:00",
-              categories: [CATEGORIES[0]],
+              categories: [optionCategories[0] || CATEGORIES[0]],
               available_days: WEEK_DAYS,
             }}
             validationSchema={schema}
             onSubmit={(values, { setSubmitting, setFieldError }) => {
               let store = { ...values };
-              store.categories = store.categories.map(
+              store.category_ids = store.categories.map(
                 (category) => category.value
               );
               let daysIndex = store.available_days.map((day) => day.value);
@@ -106,9 +111,9 @@ const RegisterForm = ({ submitHandler }) => {
                   name="categories"
                   handleBlur={setFieldTouched}
                   value={values.categories}
-                  options={CATEGORIES}
+                  options={optionCategories}
                   multiple={true}
-                  defaultValue={[CATEGORIES[0]]}
+                  defaultValue={[optionCategories[0]]}
                   error={touched.categories && errors.categories}
                   handleChange={setFieldValue}
                 />

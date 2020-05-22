@@ -5,3 +5,6 @@ export const SET_STORE_ERROR = "SET_STORE_ERROR";
 export const SET_SLOTS = "SET_SLOTS";
 
 export const SET_STORE = "SET_STORE";
+
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
+export const SET_CATEGORIES = "SET_CATEGORIES";

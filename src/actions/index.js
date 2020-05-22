@@ -2,6 +2,8 @@ import {
   REGISTER_STORE,
   SET_STORE_ERROR,
   SET_STORE,
+  FETCH_CATEGORIES,
+  SET_CATEGORIES,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -17,4 +19,13 @@ export const setStore = (store) => ({
 export const setStoreError = (error) => ({
   type: SET_STORE_ERROR,
   error: error,
+});
+
+export const fetchCategories = () => ({
+  type: FETCH_CATEGORIES,
+});
+
+export const setCategories = (categories) => ({
+  type: SET_CATEGORIES,
+  categories,
 });
