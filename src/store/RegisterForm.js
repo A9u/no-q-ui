@@ -18,8 +18,9 @@ const RegisterForm = ({ submitHandler }) => {
     address: yup.string().required(),
     city: yup.string(),
     state: yup.string(),
+    capacity: yup.number().required(),
     pincode: yup.string().required(),
-    duration: yup.string().required(),
+    duration: yup.number().required(),
     opening_time: yup.string(),
     closing_time: yup.string(),
     available_days: yup.array(),
@@ -41,6 +42,7 @@ const RegisterForm = ({ submitHandler }) => {
               state: "",
               pincode: "",
               duration: 5,
+              capacity: 1,
               opening_time: "09:00",
               closing_time: "18:00",
               available_days: WEEK_DAYS,
@@ -166,6 +168,17 @@ const RegisterForm = ({ submitHandler }) => {
                   onBlur={handleBlur}
                   value={values.duration}
                   error={touched.duration && errors.duration}
+                />
+                <NqInputV
+                  id="capacity"
+                  type="number"
+                  label="Capacity"
+                  formText="3"
+                  name="capacity"
+                  handleChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.capacity}
+                  error={touched.capacity && errors.capacity}
                 />
                 <NqTagSelect
                   id="available_days"
