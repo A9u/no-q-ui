@@ -3,14 +3,18 @@ import { Route } from "react-router-dom";
 
 import RegisterForm from './store/RegisterForm';
 import { StoreOwnerSignUpForm } from './store/StoreOwnerSignUpForm';
+import RegisterFormContainer from "./store/RegisterFormContainer";
 
 const NqRoute = () => {
   return (
     <>
-      <Route exact path="/register"> <RegisterForm submitHandler={() => alert('form submmit')} /> </Route>
       <Route exact path="/signUp"> <StoreOwnerSignUpForm/></Route>
+      <Route exact path="/register">
+        {" "}
+        <RegisterFormContainer />
+      </Route>
     </>
-  )
-}
+  );
+};
 
 export default NqRoute;
