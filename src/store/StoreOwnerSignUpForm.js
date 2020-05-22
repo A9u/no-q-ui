@@ -5,9 +5,9 @@ import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import { NqButtonSubmit } from "core-components/NqButton";
 
-export const StoreOwnerSignUpForm = () => {
+export const StoreOwnerSignUpForm = ({ submitHandler }) => {
   let signUpSchema = yup.object().shape({
-    mobile: yup.string()
+    username: yup.string()
     .required()
     .length(10, 'Invalid mobile number'),
     password: yup.string().required()
@@ -27,7 +27,7 @@ export const StoreOwnerSignUpForm = () => {
         <div className="container-fluid">
           <Formik
             initialValues={{
-              mobile: "",
+              username: "",
               password: "",
               confirmPassword: "",
               
@@ -35,7 +35,7 @@ export const StoreOwnerSignUpForm = () => {
             validationSchema={signUpSchema}
             onSubmit={(values) => {
               alert("123");
-              //submitHandler(values);
+              submitHandler(values);
             }}
           >
             {({
@@ -49,15 +49,15 @@ export const StoreOwnerSignUpForm = () => {
             }) => (
               <Form onSubmit={handleSubmit}>
                 <NqInputV
-                  id="mobile"
+                  id="username"
                   type="number"
-                  label="Mobile"
+                  label="username"
                   formText=""
-                  name="mobile"
+                  name="username"
                   handleChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.mobile}
-                  error={touched.mobile && errors.mobile}
+                  value={values.username}
+                  error={touched.username && errors.username}
                 />
                 <NqInputV
                   id="password"

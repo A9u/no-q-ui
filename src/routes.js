@@ -2,13 +2,13 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import RegisterForm from './store/RegisterForm';
-import { StoreOwnerSignUpForm } from './store/StoreOwnerSignUpForm';
+import SignUpFormContainer from './store/StoreOwnerSignUpFormContainer';
 import RegisterFormContainer from "./store/RegisterFormContainer";
 
 const NqRoute = () => {
   return (
     <>
-      <Route exact path="/signUp"> <StoreOwnerSignUpForm/></Route>
+      <Route exact path="/signUp"> <SignUpFormContainer/></Route>
       <Route exact path="/register">
         {" "}
         <RegisterFormContainer />

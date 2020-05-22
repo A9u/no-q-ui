@@ -10,7 +10,6 @@ import {
 } from "reactstrap";
 
 const NqInputV = (props) => {
-  console.log(props);
   return (
     <FormGroup row>
       <Label for={props.id} md={props.labelMd || 2}>
