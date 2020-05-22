@@ -3,7 +3,9 @@ import { Formik } from "formik";
 import { Form, Card, CardBody, CardHeader } from "reactstrap";
 import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
-import NqSelect from "core-components/NqSelect";
+import NqTagSelect from "core-components/NqTagSelect";
+import { WEEK_DAYS, CATEGORIES } from "constants/optionsConstants";
+
 import { NqButtonSubmit } from "core-components/NqButton";
 
 const RegisterForm = ({ submitHandler }) => {
@@ -17,6 +19,7 @@ const RegisterForm = ({ submitHandler }) => {
     opening_time: yup.string(),
     closing_time: yup.string(),
     available_days: yup.array(),
+    categories: yup.array(),
   });
 
   return (
@@ -36,11 +39,20 @@ const RegisterForm = ({ submitHandler }) => {
               duration: 5,
               opening_time: "09:00",
               closing_time: "18:00",
-              available_days: [],
+              available_days: WEEK_DAYS,
+              categories: [CATEGORIES[0]],
             }}
             validationSchema={schema}
-            onSubmit={(values) => {
-              alert("123");
+            onSubmit={(values, { setSubmitting, setFieldError }) => {
+              console.log("values");
+              let store = values;
+              store.categories = store.categories.map(
+                (category) => category.value
+              );
+              store.available_days = store.available_days.map(
+                (day) => day.value
+              );
+              console.log(store);
               submitHandler(values);
             }}
           >
@@ -65,15 +77,15 @@ const RegisterForm = ({ submitHandler }) => {
                   value={values.name}
                   error={touched.name && errors.name}
                 />
-
-                <NqSelect
+                <NqTagSelect
                   id="category"
                   label="Category"
                   name="category"
                   onBlur={handleBlur}
-                  value={values.category}
-                  options={["Med", "Liq", "Groc"]}
-                  error={touched.category && errors.category}
+                  value={values.categories}
+                  options={CATEGORIES}
+                  multiple={true}
+                  error={touched.categories && errors.categories}
                 />
                 <NqInputV
                   id="address"
@@ -86,7 +98,6 @@ const RegisterForm = ({ submitHandler }) => {
                   value={values.address}
                   error={touched.address && errors.address}
                 />
-
                 <NqInputV
                   id="city"
                   type="text"
@@ -98,7 +109,6 @@ const RegisterForm = ({ submitHandler }) => {
                   value={values.city}
                   error={touched.city && errors.city}
                 />
-
                 <NqInputV
                   id="state"
                   type="text"
@@ -152,16 +162,15 @@ const RegisterForm = ({ submitHandler }) => {
                   value={values.duration}
                   error={touched.duration && errors.duration}
                 />
-                <NqInputV
+                <NqTagSelect
                   id="available_days"
-                  type="text"
                   label="Available Days"
-                  formText="SD"
                   name="available_days"
-                  handleChange={handleChange}
                   onBlur={handleBlur}
-                  value={values["available_days"]}
-                  error={touched["available_days"] && errors["available_days"]}
+                  value={values.available_days}
+                  options={WEEK_DAYS}
+                  error={touched.category && errors.category}
+                  multiple={true}
                 />
                 <NqButtonSubmit
                   id="submit"
