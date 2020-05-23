@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { SignInForm } from "./SignInForm";
-import { addStoreOwner, logInUser } from "../actions";
+import { LogInForm } from "./LogInForm";
+import { logInUser } from "../actions";
 import { Redirect } from "react-router-dom";
 
 
-const signInForm = ({error, authToken, authenticated, signInHandler }) => {
+const logInForm = ({error, authenticated, logInHandler }) => {
   if (authenticated) {
     return <Redirect to = {"/register"}/>;
   } else {
-    return <SignInForm submitHandler={ signInHandler } error={error} />
+    return <LogInForm submitHandler={ logInHandler } error={error} />
   }
 };
 
@@ -22,16 +22,16 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      signInHandler: (body) => {
+      logInHandler: (body) => {
         dispatch(logInUser(body));
       },
     };
 };
 
-const SignInFormContainer = connect(
+const LogInFormContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(signInForm);
+)(logInForm);
 
-export default SignInFormContainer;
+export default LogInFormContainer;
   

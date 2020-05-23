@@ -5,8 +5,8 @@ import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import { NqButtonSubmit } from "core-components/NqButton";
 
-export const SignInForm = ({error,  submitHandler }) => {
-  let signInSchema = yup.object().shape({
+export const LogInForm = ({error,  submitHandler }) => {
+  let logInSchema = yup.object().shape({
     username: yup.string()
     .required('Mobile is a required field')
     .length(10, 'Invalid mobile number')
@@ -18,7 +18,7 @@ export const SignInForm = ({error,  submitHandler }) => {
   return (
     <Card>
       <CardHeader className="bg-dark text-light font-weight-bolder">
-        <h2> Sign In </h2>
+        <h2> Login </h2>
       </CardHeader>
       <CardBody>
         <div className="container-fluid">
@@ -28,9 +28,8 @@ export const SignInForm = ({error,  submitHandler }) => {
               username: "",
               password: ""
             }}
-            validationSchema={signInSchema}
+            validationSchema={logInSchema}
             onSubmit={(values) => {
-              alert("123");
               submitHandler(values);
             }}
           >

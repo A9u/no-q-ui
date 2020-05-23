@@ -24,7 +24,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
       newStoreOwnerHandler: (body) => {
-        debugger
         body["role_id"] = 1;
         dispatch(addStoreOwner(body));
       },

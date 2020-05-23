@@ -35,11 +35,7 @@ export const StoreOwnerSignUpForm = ({error,  submitHandler }) => {
             }}
             validationSchema={signUpSchema}
             onSubmit={(values) => {
-              alert("123");
-            
               submitHandler(values);
-
-              //setSubmitting(false)
             }}
           >
             {({

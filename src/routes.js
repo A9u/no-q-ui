@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import SignUpFormContainer from './store/StoreOwnerSignUpFormContainer';
 import RegisterFormContainer from "./store/RegisterFormContainer";
-import SignInFormContainer from "store/SignInFormContainer";
+import SignInFormContainer from "store/LogInFormContainer";
 
 const NqRoute = () => {
   return (
