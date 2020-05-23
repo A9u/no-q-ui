@@ -16,4 +16,6 @@ export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
 
 export const SET_CATEGORIES = "SET_CATEGORIES";
 
+export const LOG_IN_USER = "LOG_IN_USER";
+
 export const SET_INACTIVE_SLOTS = "SET_INACTIVE_SLOTS";

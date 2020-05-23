@@ -13,7 +13,7 @@ const storeOwnerSignUpForm = ({
   if (authenticated) {
     return <Redirect to={"/register"} />;
   } else {
-    return <StoreOwnerSignUpForm submitHandler={newStoreOwnerHandler} />;
+    return <StoreOwnerSignUpForm submitHandler={ newStoreOwnerHandler }/>
   }
 };
 
@@ -24,11 +24,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    newStoreOwnerHandler: (body) => {
-      dispatch(addStoreOwner(body));
-    },
-  };
+    return {
+      newStoreOwnerHandler: (body) => {
+        //body["role_id"] = 1;
+        dispatch(addStoreOwner(body));
+      },
+    };
 };
 
 const SignUpFormContainer = connect(

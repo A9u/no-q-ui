@@ -8,7 +8,7 @@ import NqRoute from "./routes.js";
 function App() {
   return (
     <BrowserRouter>
-      <ReactNotification />
+      <ReactNotification/>
 
       <NqRoute />
       <div className="App"></div>
