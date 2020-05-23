@@ -60,9 +60,7 @@ function* fetchCategories() {
 
 function* setInactiveSlots(slots) {
   try {
-    const json = yield PostApiCall("/slots/mark", slots).then((response) =>
-      response.json()
-    );
+    const json = yield call(authorizedPostApiCall, "/slots/mark", slots);
     if (json.data) {
       console.log("successfully set inactive");
       console.log(json.data);

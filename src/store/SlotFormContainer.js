@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import SlotForm from "store/SlotForm";
 import { setInactiveSlots } from "actions";
 
-const Form = ({ slots, confirmHandler }) => {
+const Form = ({ slots, confirmHandler, code }) => {
   let [inActiveSlots, setInactiveState] = useState([]);
 
   const handleSubmit = (body) => {
@@ -28,12 +28,14 @@ const Form = ({ slots, confirmHandler }) => {
       slots={slots}
       handleSubmit={handleSubmit}
       handleChange={handleChange}
+      code={code}
     />
   );
 };
 
 const mapStateToProps = (state) => ({
   slots: state.store.slots,
+  code: state.store.code,
 });
 
 const mapDispatchToProps = (dispatch) => ({
