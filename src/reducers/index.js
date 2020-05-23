@@ -3,6 +3,7 @@ import {
   SET_STORE_ERROR,
   SET_STORE,
   SET_CATEGORIES,
+  SET_INACTIVE_SLOTS,
 } from "../constants/actionConstants";
 
 const reducer = (state = {}, action) => {
@@ -32,6 +33,10 @@ const reducer = (state = {}, action) => {
         ...state,
         categories: action.categories,
         loading: false,
+      };
+    case SET_INACTIVE_SLOTS:
+      return {
+        ...state,
       };
     default:
       return state;

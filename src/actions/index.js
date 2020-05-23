@@ -4,6 +4,7 @@ import {
   SET_STORE,
   FETCH_CATEGORIES,
   SET_CATEGORIES,
+  SET_INACTIVE_SLOTS,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -28,4 +29,9 @@ export const fetchCategories = () => ({
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
   categories,
+});
+
+export const setInactiveSlots = (slots) => ({
+  type: SET_INACTIVE_SLOTS,
+  slots,
 });
