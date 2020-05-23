@@ -5,13 +5,8 @@ import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import NqTagSelect from "core-components/NqTagSelect";
 import { WEEK_DAYS, CATEGORIES } from "constants/optionsConstants";
-import {
-  NqSuccessNotification,
-  NqErrorNotification,
-} from "core-components/NqNotification";
 
 import { NqButtonSubmit } from "core-components/NqButton";
-import { waitForElement } from "@testing-library/react";
 
 const RegisterForm = ({ submitHandler, categories }) => {
   let optionCategories = categories.map((category) => ({
@@ -75,10 +70,8 @@ const RegisterForm = ({ submitHandler, categories }) => {
                 daysIndex.includes(day.value) ? 1 : 0
               ).join("");
 
-              NqSuccessNotification("Done Successfully");
               console.log(store);
               submitHandler(store);
-              NqErrorNotification("Failed to submit");
             }}
           >
             {({
