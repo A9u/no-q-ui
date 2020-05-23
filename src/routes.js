@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import RegisterForm from './store/RegisterForm';
 import SignUpFormContainer from './store/StoreOwnerSignUpFormContainer';
 import RegisterFormContainer from "./store/RegisterFormContainer";
 
