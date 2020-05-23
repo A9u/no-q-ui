@@ -2,17 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "reactstrap";
 
-const SaButton = (props) => {
+const NqButton = (props) => {
   return (
-    <Button color={props.color} type={props.type} id={props.id} {...props}>
+    <Button
+      color={props.color}
+      type={props.type}
+      id={props.id}
+      className={props.className}
+      onClick={props.handleClick}
+    >
       {props.label}
     </Button>
   );
 };
 
-const NqButtonSubmit = (props) => <SaButton color="success" {...props} />;
+const NqButtonSubmit = (props) => <NqButton color="success" {...props} />;
 
-SaButton.propTypes = {
+NqButton.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   id: PropTypes.string,
@@ -21,4 +27,4 @@ SaButton.propTypes = {
 };
 
 export { NqButtonSubmit };
-export default SaButton;
+export default NqButton;
