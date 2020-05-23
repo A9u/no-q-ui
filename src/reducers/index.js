@@ -8,6 +8,7 @@ import {
   SET_STORE,
   SET_CATEGORIES,
   LOG_IN_USER,
+  SET_INACTIVE_SLOTS,
 } from "../constants/actionConstants";
 
 const reducer = (state = {}, action) => {
@@ -35,7 +36,6 @@ const reducer = (state = {}, action) => {
 
     case ADD_STORE_OWNER:
     case LOG_IN_USER:
-      console.log('log in user', action)  
       return {
         ...state,
         loading: true,
@@ -63,6 +63,10 @@ const reducer = (state = {}, action) => {
         ...state,
         categories: action.categories,
         loading: false,
+      };
+    case SET_INACTIVE_SLOTS:
+      return {
+        ...state,
       };
     default:
       return state;

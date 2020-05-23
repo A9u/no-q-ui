@@ -9,6 +9,7 @@ import {
   FETCH_CATEGORIES,
   SET_CATEGORIES,
   LOG_IN_USER,
+  SET_INACTIVE_SLOTS,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -31,15 +32,15 @@ export const addStoreOwner = (owner) => ({
   user: owner,
 });
 
-export const setAuthSuccess = ( authToken) => ({
+export const setAuthSuccess = (authToken) => ({
   type: AUTHENTICATION_SUCCESS,
-  authToken: authToken
+  authToken: authToken,
 });
 
 export const setAuthFailure = (error) => ({
   type: AUTHENTICATION_FAILURE,
-  error: error
-})
+  error: error,
+});
 
 export const fetchCategories = () => ({
   type: FETCH_CATEGORIES,
@@ -53,4 +54,9 @@ export const setCategories = (categories) => ({
 export const logInUser = (user) => ({
   type: LOG_IN_USER,
   user: user,
+});
+
+export const setInactiveSlots = (slots) => ({
+  type: SET_INACTIVE_SLOTS,
+  slots,
 });
