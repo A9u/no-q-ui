@@ -9,7 +9,6 @@ import {
   SET_CATEGORIES,
 } from "../constants/actionConstants";
 
-
 const reducer = (state = {}, action) => {
   console.log("inside reducer");
   console.log(action);
@@ -36,27 +35,26 @@ const reducer = (state = {}, action) => {
     case ADD_STORE_OWNER:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
 
     case AUTHENTICATION_SUCCESS:
-      console.log('set success', action)
       return {
         ...state,
-        loading:false,
+        loading: false,
         authenticated: true,
-        authToken : action.authToken,
-      }
-    
-      case AUTHENTICATION_FAILURE:
-        console.log('set failure', action)
-        return {
-          ...state,
-          loading:false,
-          authenticated: false,
-          isSubmitting: false,
-          error: { ...state.error, authError: action.error }
-        }  
+        authToken: action.authToken,
+      };
+
+    case AUTHENTICATION_FAILURE:
+      console.log("set failure", action);
+      return {
+        ...state,
+        loading: false,
+        authenticated: false,
+        isSubmitting: false,
+        error: { ...state.error, authError: action.error },
+      };
     case SET_CATEGORIES:
       return {
         ...state,

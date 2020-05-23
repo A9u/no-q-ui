@@ -1,4 +1,4 @@
-import { put, takeLatest, all, call } from "redux-saga/effects";
+import { put, takeLatest, all, call, select } from "redux-saga/effects";
 import { setAuthSuccess, setAuthFailure } from "actions";
 import { USERS_URL } from "constants/apiConstants";
 import { setStore, setStoreError, setCategories } from "actions";
@@ -7,15 +7,23 @@ import {
   FETCH_CATEGORIES,
   ADD_STORE_OWNER,
 } from "constants/actionConstants";
-import { PostApiCall, GetApiCall } from "apis";
+import { PostApiCall, GetApiCall, getJSON } from "apis";
+import { getToken } from "../selectors";
 import { NqErrorNotification } from "core-components/NqNotification";
+
+function* authorizedPostApiCall(url, body) {
+  const token = yield select(getToken);
+
+  const json = yield call(PostApiCall, url, body, { Authorization: token });
+
+  const response = yield call(getJSON, json);
+
+  return response;
+}
 
 function* registerStore(store) {
   try {
-    console.log(store);
-    const json = yield PostApiCall("/stores", store).then((response) =>
-      response.json()
-    );
+    const json = yield call(authorizedPostApiCall, "/stores", store);
     if (json.data) {
       console.log("response received");
       console.log(json.data);
