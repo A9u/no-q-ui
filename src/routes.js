@@ -10,7 +10,6 @@ const NqRoute = () => {
     <>
       <Route exact path="/signUp"> <SignUpFormContainer/></Route>
       <Route exact path="/register">
-        {" "}
         <RegisterFormContainer />
       </Route>
     </>

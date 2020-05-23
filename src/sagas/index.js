@@ -1,9 +1,14 @@
-import { put, takeLatest, all } from "redux-saga/effects";
+import { put, takeLatest, all, call } from "redux-saga/effects";
 import { setAuthSuccess, setAuthFailure } from "actions";
 import { USERS_URL } from "constants/apiConstants";
 import { setStore, setStoreError, setCategories } from "actions";
-import { REGISTER_STORE, FETCH_CATEGORIES, ADD_STORE_OWNER } from "constants/actionConstants";
+import {
+  REGISTER_STORE,
+  FETCH_CATEGORIES,
+  ADD_STORE_OWNER,
+} from "constants/actionConstants";
 import { PostApiCall, GetApiCall } from "apis";
+import { NqErrorNotification } from "core-components/NqNotification";
 
 function* registerStore(store) {
   try {
@@ -46,24 +51,21 @@ function* watcher() {
 }
 
 export default function* rootSaga() {
-
   yield all([watcher()]);
 }
 
-function* addShopOwner(data) {
+function* addShopOwner(body) {
   try {
-   
-    var body = {user: data.user}
     const json = yield PostApiCall(USERS_URL, body).then((response) => {
-      return response.json()
-    });   
-    
+      return response.json();
+    });
+
     if (json.data.auth_token) {
-      yield put(setAuthSuccess(json.data.auth_token))
+      yield put(setAuthSuccess(json.data.auth_token));
     } else {
-      yield put(setAuthFailure(json.message))
+      yield put(setAuthFailure(json.message));
+      yield call(NqErrorNotification, json.message.join("."));
     }
-    
   } catch (error) {
     yield put(setAuthFailure(error));
   }
