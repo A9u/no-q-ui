@@ -5,11 +5,15 @@ import { setStore, setStoreError, setCategories } from "actions";
 import {
   REGISTER_STORE,
   FETCH_CATEGORIES,
+  SET_INACTIVE_SLOTS,
   ADD_STORE_OWNER,
 } from "constants/actionConstants";
+import {
+  NqSuccessNotification,
+  NqErrorNotification,
+} from "core-components/NqNotification";
 import { PostApiCall, GetApiCall, getJSON } from "apis";
 import { getToken } from "../selectors";
-import { NqErrorNotification } from "core-components/NqNotification";
 
 function* authorizedPostApiCall(url, body) {
   const token = yield select(getToken);
@@ -28,8 +32,10 @@ function* registerStore(store) {
       console.log("response received");
       console.log(json.data);
       yield put(setStore(json.data));
+      yield call(NqSuccessNotification, json.message);
     } else {
       yield put(setStoreError(json.error));
+      yield call(NqErrorNotification, json.message);
     }
   } catch (error) {
     yield put(setStoreError(error));
@@ -52,9 +58,23 @@ function* fetchCategories() {
   }
 }
 
+function* setInactiveSlots(slots) {
+  try {
+    const json = yield call(authorizedPostApiCall, "/slots/mark", slots);
+    if (json.data) {
+      console.log("successfully set inactive");
+      console.log(json.data);
+      yield call(NqSuccessNotification, json.message);
+    }
+  } catch (error) {
+    console.log("error while setting ");
+  }
+}
+
 function* watcher() {
   yield takeLatest(REGISTER_STORE, registerStore);
   yield takeLatest(FETCH_CATEGORIES, fetchCategories);
+  yield takeLatest(SET_INACTIVE_SLOTS, setInactiveSlots);
   yield takeLatest(ADD_STORE_OWNER, addShopOwner);
 }
 

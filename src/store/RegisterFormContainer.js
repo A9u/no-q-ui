@@ -17,7 +17,7 @@ const Form = ({
   }, []);
 
   if (store) {
-    return <h1> Store created successfully </h1>;
+    return <Redirect to={"/slots"} />;
   } else {
     return (
       <RegisterForm

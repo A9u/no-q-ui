@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 
 import SignUpFormContainer from './store/StoreOwnerSignUpFormContainer';
 import RegisterFormContainer from "./store/RegisterFormContainer";
+import SlotFormContainter from "store/SlotFormContainer";
 
 const NqRoute = () => {
   return (
@@ -10,6 +11,9 @@ const NqRoute = () => {
       <Route exact path="/signUp"> <SignUpFormContainer/></Route>
       <Route exact path="/register">
         <RegisterFormContainer />
+      </Route>
+      <Route exact path="/slots">
+        <SlotFormContainter />
       </Route>
     </>
   );
