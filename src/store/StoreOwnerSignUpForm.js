@@ -4,27 +4,21 @@ import { Form, Card, CardBody, CardHeader } from "reactstrap";
 import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import { NqButtonSubmit } from "core-components/NqButton";
-import {
-  NqSuccessNotification,
-  NqErrorNotification,
-} from "core-components/NqNotification";
 
-
-export const StoreOwnerSignUpForm = ({error,  submitHandler }) => {
-  if (error) {
-    NqErrorNotification(error.join());
-  }
+export const StoreOwnerSignUpForm = ({submitHandler }) => {
   let signUpSchema = yup.object().shape({
-    username: yup.string()
-    .required('Mobile is a required field')
-    .length(10, 'Invalid mobile number')
-    .matches('\\d{10}', 'Invalid mobile number'),
-    password: yup.string().required('Password is a required field')
-    .min(6),
-    password_confirmation: yup.string().required('Confirm Password is a required field')
-    .test('passwords-match', 'Passwords must match', function(value) {
-      return this.parent.password === value;
-    }),
+    username: yup
+      .string()
+      .required("Mobile is a required field")
+      .length(10, "Invalid mobile number")
+      .matches("\\d{10}", "Invalid mobile number"),
+    password: yup.string().required("Password is a required field").min(6),
+    password_confirmation: yup
+      .string()
+      .required("Confirm Password is a required field")
+      .test("passwords-match", "Passwords must match", function (value) {
+        return this.parent.password === value;
+      }),
   });
 
   return (
@@ -42,7 +36,8 @@ export const StoreOwnerSignUpForm = ({error,  submitHandler }) => {
             }}
             validationSchema={signUpSchema}
             onSubmit={(values) => {
-              submitHandler(values);  
+              let body = { ...values, role_id: 1 };
+              submitHandler(body);
             }}
           >
             {({
@@ -86,7 +81,10 @@ export const StoreOwnerSignUpForm = ({error,  submitHandler }) => {
                   handleChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password_confirmation}
-                  error={touched.password_confirmation && errors.password_confirmation}
+                  error={
+                    touched.password_confirmation &&
+                    errors.password_confirmation
+                  }
                 />
                 <NqButtonSubmit
                   id="submit"
@@ -102,4 +100,4 @@ export const StoreOwnerSignUpForm = ({error,  submitHandler }) => {
       </CardBody>
     </Card>
   );
-}
+};

@@ -1,16 +1,30 @@
-import { put, takeLatest, all } from "redux-saga/effects";
+import { put, takeLatest, all, call, select } from "redux-saga/effects";
 import { setAuthSuccess, setAuthFailure } from "actions";
 import { USERS_URL, SESSIONS_URL } from "constants/apiConstants";
 import { setStore, setStoreError, setCategories } from "actions";
-import { REGISTER_STORE, FETCH_CATEGORIES, ADD_STORE_OWNER, LOG_IN_USER } from "constants/actionConstants";
-import { PostApiCall, GetApiCall } from "apis";
+import {
+  REGISTER_STORE,
+  FETCH_CATEGORIES,
+  ADD_STORE_OWNER,
+  LOG_IN_USER,
+} from "constants/actionConstants";
+import { PostApiCall, GetApiCall, getJSON } from "apis";
+import { getToken } from "../selectors";
+import { NqErrorNotification } from "core-components/NqNotification";
+
+function* authorizedPostApiCall(url, body) {
+  const token = yield select(getToken);
+
+  const json = yield call(PostApiCall, url, body, { Authorization: token });
+
+  const response = yield call(getJSON, json);
+
+  return response;
+}
 
 function* registerStore(store) {
   try {
-    console.log(store);
-    const json = yield PostApiCall("/stores", store).then((response) =>
-      response.json()
-    );
+    const json = yield call(authorizedPostApiCall, "/stores", store);
     if (json.data) {
       console.log("response received");
       console.log(json.data);
@@ -47,24 +61,21 @@ function* watcher() {
 }
 
 export default function* rootSaga() {
-
   yield all([watcher()]);
 }
 
-function* addShopOwner(data) {
+function* addShopOwner(body) {
   try {
-   
-    var body = {user: data.user}
     const json = yield PostApiCall(USERS_URL, body).then((response) => {
-      return response.json()
-    });   
-    
+      return response.json();
+    });
+
     if (json.data.auth_token) {
-      yield put(setAuthSuccess(json.data.auth_token))
+      yield put(setAuthSuccess(json.data.auth_token));
     } else {
-      yield put(setAuthFailure(json.message))
+      yield put(setAuthFailure(json.message));
+      yield call(NqErrorNotification, json.message.join("."));
     }
-    
   } catch (error) {
     yield put(setAuthFailure(error));
   }
@@ -72,7 +83,7 @@ function* addShopOwner(data) {
 
 function* logInUser(data) {
   try {
-    debugger
+    
     var body = {user: data.user}
     const json = yield PostApiCall(SESSIONS_URL, body).then((response) => {
       return response.json()
@@ -80,8 +91,10 @@ function* logInUser(data) {
     
     if (json.data.auth_token) {
       yield put(setAuthSuccess(json.data.auth_token))
+      
     } else {
       yield put(setAuthFailure(json.message))
+      yield call(NqErrorNotification, json.message);
     }
     
   } catch (error) {

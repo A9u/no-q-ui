@@ -47,7 +47,7 @@ export const fetchCategories = () => ({
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
-  categories: categories,
+  categories,
 });
 
 export const logInUser = (user) => ({

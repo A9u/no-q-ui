@@ -10,7 +10,7 @@ const logInForm = ({error, authenticated, logInHandler }) => {
   if (authenticated) {
     return <Redirect to = {"/register"}/>;
   } else {
-    return <LogInForm submitHandler={ logInHandler } error={error} />
+    return <LogInForm submitHandler={ logInHandler }/>
   }
 };
 

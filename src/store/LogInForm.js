@@ -9,10 +9,8 @@ import {
   NqErrorNotification,
 } from "core-components/NqNotification";
 
-export const LogInForm = ({error,  submitHandler }) => {
-  if (error) {
-    NqErrorNotification(error);
-  }
+export const LogInForm = ({submitHandler }) => {
+  
   let logInSchema = yup.object().shape({
     username: yup.string()
     .required('Mobile is a required field')
