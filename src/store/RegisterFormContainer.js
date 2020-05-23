@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import RegisterForm from "./RegisterForm";
-import { registerStore } from "../actions";
+import { registerStore, fetchCategories } from "../actions";
 
-const registerForm = ({ error, createStoreHandler }) => (
-  <RegisterForm submitHandler={createStoreHandler} error={error} />
-);
+const Form = ({
+  getCategories,
+  store,
+  error,
+  createStoreHandler,
+  categories,
+}) => {
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  if (store) {
+    return <h1> Store created successfully </h1>;
+  } else {
+    return (
+      <RegisterForm
+        submitHandler={createStoreHandler}
+        error={error}
+        categories={categories}
+      />
+    );
+  }
+};
 
 const mapStateToProps = (state) => ({
   error: state.error && state.error.StoreError,
+  store: state.store,
+  categories: state.categories || [],
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -18,12 +40,15 @@ const mapDispatchToProps = (dispatch) => {
     createStoreHandler: (body) => {
       dispatch(registerStore(body));
     },
+    getCategories: () => {
+      dispatch(fetchCategories());
+    },
   };
 };
 
 const RegisterFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(registerForm);
+)(Form);
 
 export default RegisterFormContainer;

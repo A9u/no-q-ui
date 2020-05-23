@@ -4,7 +4,10 @@ import {
   SET_SLOTS,
   ADD_STORE_OWNER,
   AUTHENTICATION_SUCCESS,
-  AUTHENTICATION_FAILURE
+  AUTHENTICATION_FAILURE,
+  SET_STORE,
+  FETCH_CATEGORIES,
+  SET_CATEGORIES,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -12,9 +15,9 @@ export const registerStore = (store) => ({
   store: store,
 });
 
-export const setSlots = (slots) => ({
-  type: SET_SLOTS,
-  slots: slots,
+export const setStore = (store) => ({
+  type: SET_STORE,
+  store: store,
 });
 
 export const setStoreError = (error) => ({
@@ -34,5 +37,14 @@ export const setAuthSuccess = ( authToken) => ({
 
 export const setAuthFailure = (error) => ({
   type: AUTHENTICATION_FAILURE,
-  error: error,
+  error: error
+})
+
+export const fetchCategories = () => ({
+  type: FETCH_CATEGORIES,
+});
+
+export const setCategories = (categories) => ({
+  type: SET_CATEGORIES,
+  categories,
 });

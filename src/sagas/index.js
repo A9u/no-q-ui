@@ -1,52 +1,59 @@
 import { put, takeLatest, all } from "redux-saga/effects";
-import { setSlots, setStoreError, setAuthSuccess, setAuthFailure } from "actions";
-import { REGISTER_STORE, ADD_STORE_OWNER, AUTHENTICATION_SUCCESS } from "../constants/actionConstants";
-import { PostApiCall } from "apis";
+import { setAuthSuccess, setAuthFailure } from "actions";
 import { USERS_URL } from "constants/apiConstants";
+import { setStore, setStoreError, setCategories } from "actions";
+import { REGISTER_STORE, FETCH_CATEGORIES, ADD_STORE_OWNER } from "constants/actionConstants";
+import { PostApiCall, GetApiCall } from "apis";
 
 function* registerStore(store) {
   try {
     console.log(store);
-    // const json = yield PostApiCall("/store", store).then((response) =>
-    //   response.json()
-    // );
-    // if (json.data) {
-    //   yield put(setSlots(json.data));
-    // } else {
-    //   yield put(setStoreError(json.error));
-    // }
+    const json = yield PostApiCall("/stores", store).then((response) =>
+      response.json()
+    );
+    if (json.data) {
+      console.log("response received");
+      console.log(json.data);
+      yield put(setStore(json.data));
+    } else {
+      yield put(setStoreError(json.error));
+    }
   } catch (error) {
     yield put(setStoreError(error));
   }
 }
 
-function* watcher(action, saga) {
+function* fetchCategories() {
+  try {
+    const json = yield GetApiCall("/categories").then((response) =>
+      response.json()
+    );
+    if (json.data) {
+      console.log("categories fetched");
+      console.log(json.data);
+      yield put(setCategories(json.data));
+    }
+  } catch (error) {
+    console.log("fetching categories");
+    console.log(error);
+  }
+}
 
-  yield takeLatest(action, saga);
+function* watcher() {
+  yield takeLatest(REGISTER_STORE, registerStore);
+  yield takeLatest(FETCH_CATEGORIES, fetchCategories);
+  yield takeLatest(ADD_STORE_OWNER, addShopOwner);
 }
 
 export default function* rootSaga() {
 
-  yield all([watcher(REGISTER_STORE, registerStore),
-     watcher(ADD_STORE_OWNER, addShopOwner)]);
+  yield all([watcher()]);
 }
 
 function* addShopOwner(data) {
   try {
-    debugger
-    
+   
     var body = {user: data.user}
-    // const json = yield PostApiCall(USERS_URL, body).then((response) => {
-    //     let responseBody = response.json()
-    //     if (responseBody.data) {
-    //        return setAuthSuccess(responseBody.data.auth_token)
-    //     } else {
-    //        return setAuthFailure(responseBody.message)
-    //     }
-    // }).catch((error) => {
-    //   console.log('error ',error)
-    //     return setAuthFailure(error)
-    // });
     const json = yield PostApiCall(USERS_URL, body).then((response) => {
       return response.json()
     });   
@@ -58,7 +65,6 @@ function* addShopOwner(data) {
     }
     
   } catch (error) {
-    debugger
     yield put(setAuthFailure(error));
   }
 }

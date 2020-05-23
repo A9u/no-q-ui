@@ -5,6 +5,8 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 
 import "./index.css";
+import "react-notifications-component/dist/theme.css";
+
 import App from "./App";
 import reducer from "./reducers";
 import rootSaga from "./sagas";

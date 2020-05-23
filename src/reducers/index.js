@@ -4,15 +4,21 @@ import {
   SET_SLOTS,
   ADD_STORE_OWNER,
   AUTHENTICATION_SUCCESS,
-  AUTHENTICATION_FAILURE
+  AUTHENTICATION_FAILURE,
+  SET_STORE,
+  SET_CATEGORIES,
 } from "../constants/actionConstants";
 
+
 const reducer = (state = {}, action) => {
+  console.log("inside reducer");
+  console.log(action);
+
   switch (action.type) {
-    case SET_SLOTS:
+    case SET_STORE:
       return {
         ...state,
-        slots: action.payload.slots,
+        store: action.store,
         loading: false,
       };
     case SET_STORE_ERROR:
@@ -51,6 +57,12 @@ const reducer = (state = {}, action) => {
           isSubmitting: false,
           error: { ...state.error, authError: action.error }
         }  
+    case SET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.categories,
+        loading: false,
+      };
     default:
       return state;
   }
