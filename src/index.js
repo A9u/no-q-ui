@@ -1,16 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import createSagaMiddleware from "redux-saga";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+
 import "./index.css";
 import "react-notifications-component/dist/theme.css";
 
 import App from "./App";
+import reducer from "./reducers";
+import rootSaga from "./sagas";
+
 import * as serviceWorker from "./serviceWorker";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById("root")
 );
 
