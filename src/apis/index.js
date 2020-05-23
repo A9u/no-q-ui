@@ -12,11 +12,11 @@ export const PostApiCall = (url, body) => {
 };
 
 export const GetApiCall = (url, body) => {
-  return fetch("http://localhost:3001" + url, {
+  return fetch(PORTAL_URL + url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/no-q.com; version=1",
+      "Accept" : "application/no-q.com; version=1",
     },
   });
 };

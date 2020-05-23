@@ -8,6 +8,7 @@ import {
   SET_STORE,
   FETCH_CATEGORIES,
   SET_CATEGORIES,
+  LOG_IN_USER,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -46,5 +47,10 @@ export const fetchCategories = () => ({
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
-  categories,
+  categories: categories,
+});
+
+export const logInUser = (user) => ({
+  type: LOG_IN_USER,
+  user: user,
 });

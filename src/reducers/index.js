@@ -7,6 +7,7 @@ import {
   AUTHENTICATION_FAILURE,
   SET_STORE,
   SET_CATEGORIES,
+  LOG_IN_USER,
 } from "../constants/actionConstants";
 
 
@@ -34,6 +35,8 @@ const reducer = (state = {}, action) => {
       };
 
     case ADD_STORE_OWNER:
+    case LOG_IN_USER:
+      console.log('log in user', action)  
       return {
         ...state,
         loading: true
