@@ -18,7 +18,7 @@ export const NqSuccessNotification = (message) => {
 
 export const NqErrorNotification = (message) => {
   store.addNotification({
-    title: "You made a mistake",
+    title: "Error",
     message: message,
     type: "danger",
     insert: "top",

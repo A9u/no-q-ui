@@ -4,8 +4,15 @@ import { Form, Card, CardBody, CardHeader } from "reactstrap";
 import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import { NqButtonSubmit } from "core-components/NqButton";
+import {
+  NqSuccessNotification,
+  NqErrorNotification,
+} from "core-components/NqNotification";
 
 export const LogInForm = ({error,  submitHandler }) => {
+  if (error) {
+    NqErrorNotification(error);
+  }
   let logInSchema = yup.object().shape({
     username: yup.string()
     .required('Mobile is a required field')
@@ -22,7 +29,6 @@ export const LogInForm = ({error,  submitHandler }) => {
       </CardHeader>
       <CardBody>
         <div className="container-fluid">
-          <div>{error}</div>
           <Formik
             initialValues={{
               username: "",

@@ -5,12 +5,10 @@ import { StoreOwnerSignUpForm } from "./StoreOwnerSignUpForm";
 import { addStoreOwner } from "../actions";
 import { Redirect } from "react-router-dom";
 
-
 const storeOwnerSignUpForm = ({error, authToken, authenticated, newStoreOwnerHandler }) => {
   if (authenticated) {
     return <Redirect to = {"/register"}/>;
   } else {
-    console.log('Error', error)
     return <StoreOwnerSignUpForm submitHandler={ newStoreOwnerHandler } error={error} />
   }
 };
