@@ -2,7 +2,9 @@ import {
   REGISTER_STORE,
   SET_STORE_ERROR,
   SET_SLOTS,
-  ADD_STORE_OWNER
+  ADD_STORE_OWNER,
+  AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILURE
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -23,4 +25,14 @@ export const setStoreError = (error) => ({
 export const addStoreOwner = (owner) => ({
   type: ADD_STORE_OWNER,
   user: owner,
+});
+
+export const setAuthSuccess = ( authToken) => ({
+  type: AUTHENTICATION_SUCCESS,
+  authToken: authToken
+});
+
+export const setAuthFailure = (error) => ({
+  type: AUTHENTICATION_FAILURE,
+  error: error,
 });

@@ -5,14 +5,15 @@ import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import { NqButtonSubmit } from "core-components/NqButton";
 
-export const StoreOwnerSignUpForm = ({ submitHandler }) => {
+export const StoreOwnerSignUpForm = ({error,  submitHandler }) => {
   let signUpSchema = yup.object().shape({
     username: yup.string()
-    .required()
-    .length(10, 'Invalid mobile number'),
-    password: yup.string().required()
-    .min(8),
-    confirmPassword: yup.string().required()
+    .required('Mobile is a required field')
+    .length(10, 'Invalid mobile number')
+    .matches('\\d{10}', 'Invalid mobile number'),
+    password: yup.string().required('Password is a required field')
+    .min(6),
+    password_confirmation: yup.string().required('Confirm Password is a required field')
     .test('passwords-match', 'Passwords must match', function(value) {
       return this.parent.password === value;
     }),
@@ -21,21 +22,24 @@ export const StoreOwnerSignUpForm = ({ submitHandler }) => {
   return (
     <Card>
       <CardHeader className="bg-dark text-light font-weight-bolder">
-        <h2> Register your store </h2>
+        <h2> Sign up </h2>
       </CardHeader>
       <CardBody>
         <div className="container-fluid">
+          <div>{error}</div>
           <Formik
             initialValues={{
               username: "",
               password: "",
-              confirmPassword: "",
-              
+              password_confirmation: "",
             }}
             validationSchema={signUpSchema}
             onSubmit={(values) => {
               alert("123");
+            
               submitHandler(values);
+
+              //setSubmitting(false)
             }}
           >
             {({
@@ -45,13 +49,13 @@ export const StoreOwnerSignUpForm = ({ submitHandler }) => {
               handleChange,
               handleBlur,
               handleSubmit,
-              isSubmitting,
+              //isSubmitting,
             }) => (
               <Form onSubmit={handleSubmit}>
                 <NqInputV
                   id="username"
-                  type="number"
-                  label="username"
+                  type="text"
+                  label="Mobile"
                   formText=""
                   name="username"
                   handleChange={handleChange}
@@ -71,22 +75,22 @@ export const StoreOwnerSignUpForm = ({ submitHandler }) => {
                   error={touched.password && errors.password}
                 />
                 <NqInputV
-                  id="confirmPassword"
+                  id="password_confirmation"
                   type="password"
-                  label="confirm Password"
+                  label="Confirm Password"
                   formText=""
-                  name="confirmPassword"
+                  name="password_confirmation"
                   handleChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.confirmPassword}
-                  error={touched.confirmPassword && errors.confirmPassword}
+                  value={values.password_confirmation}
+                  error={touched.password_confirmation && errors.password_confirmation}
                 />
                 <NqButtonSubmit
                   id="submit"
                   type="submit"
                   label="Submit"
                   className="btn-primary"
-                  disabled={isSubmitting}
+                  //disabled={isSubmitting}
                 />
               </Form>
             )}

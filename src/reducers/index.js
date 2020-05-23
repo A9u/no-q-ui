@@ -2,7 +2,9 @@ import {
   REGISTER_STORE,
   SET_STORE_ERROR,
   SET_SLOTS,
-  ADD_STORE_OWNER
+  ADD_STORE_OWNER,
+  AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILURE
 } from "../constants/actionConstants";
 
 const reducer = (state = {}, action) => {
@@ -26,11 +28,29 @@ const reducer = (state = {}, action) => {
       };
 
     case ADD_STORE_OWNER:
-      console.log('adding store owner')
       return {
         ...state,
         loading: true
       }
+
+    case AUTHENTICATION_SUCCESS:
+      console.log('set success', action)
+      return {
+        ...state,
+        loading:false,
+        authenticated: true,
+        authToken : action.authToken,
+      }
+    
+      case AUTHENTICATION_FAILURE:
+        console.log('set failure', action)
+        return {
+          ...state,
+          loading:false,
+          authenticated: false,
+          isSubmitting: false,
+          error: { ...state.error, authError: action.error }
+        }  
     default:
       return state;
   }

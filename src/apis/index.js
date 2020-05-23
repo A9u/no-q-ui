@@ -1,9 +1,11 @@
+import { PORTAL_URL } from "constants/apiConstants";
+
 export const PostApiCall = (url, body) => {
-  return fetch("http://localhost:3001" + url, {
+  return fetch(PORTAL_URL + url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/vnd.no-q.com; version=1",
+      "Accept": "application/no-q.com; version=1",
     },
     body: JSON.stringify(body),
   });
