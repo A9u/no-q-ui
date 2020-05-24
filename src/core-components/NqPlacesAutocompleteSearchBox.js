@@ -1,6 +1,7 @@
 import React from "react";
 import { FormGroup, Label, Col } from "reactstrap";
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
+import { GOOGLE_API_KEY } from "constants/apiConstants";
 
 const PlacesAutoCompleteSearchBox = (props) => {
     return (
@@ -10,7 +11,7 @@ const PlacesAutoCompleteSearchBox = (props) => {
             </Label>
             <Col md={props.textMd || 6}>
             <ReactGoogleAutocomplete id= "address" class = "w-100" 
-                apiKey = {process.env.REACT_APP_GOOGLE_API_KEY}
+                apiKey = {GOOGLE_API_KEY}
                 onPlaceSelected={(place, input) => {
                     props.onPlaceSelected(props.id, input.value , false)
                 }}
