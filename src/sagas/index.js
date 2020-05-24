@@ -45,9 +45,9 @@ function* registerStore(store) {
 
 function* fetchCategories() {
   try {
-    const json = yield GetApiCall("/categories").then((response) =>
-      response.json()
-    );
+    const response = yield call(GetApiCall, "/categories");
+    const json = yield call(getJSON, response);
+
     if (json.data) {
       console.log("categories fetched");
       console.log(json.data);
@@ -103,20 +103,17 @@ function* addShopOwner(body) {
 
 function* logInUser(data) {
   try {
-    
-    var body = {user: data.user}
+    var body = { user: data.user };
     const json = yield PostApiCall(SESSIONS_URL, body).then((response) => {
-      return response.json()
-    });   
-    
+      return response.json();
+    });
+
     if (json.data.auth_token) {
-      yield put(setAuthSuccess(json.data.auth_token))
-      
+      yield put(setAuthSuccess(json.data.auth_token));
     } else {
-      yield put(setAuthFailure(json.message))
+      yield put(setAuthFailure(json.message));
       yield call(NqErrorNotification, json.message);
     }
-    
   } catch (error) {
     yield put(setAuthFailure(error));
   }
