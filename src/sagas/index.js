@@ -18,7 +18,7 @@ import { getToken } from "../selectors";
 
 function* authorizedPostApiCall(url, body) {
   const token = yield select(getToken);
-
+  debugger
   const json = yield call(PostApiCall, url, body, { Authorization: token });
 
   const response = yield call(getJSON, json);
@@ -89,7 +89,7 @@ function* addShopOwner(body) {
     const json = yield PostApiCall(USERS_URL, body).then((response) => {
       return response.json();
     });
-
+    debugger
     if (json.data.auth_token) {
       yield put(setAuthSuccess(json.data.auth_token));
     } else {
@@ -107,7 +107,7 @@ function* logInUser(data) {
     const json = yield PostApiCall(SESSIONS_URL, body).then((response) => {
       return response.json();
     });
-
+    debugger
     if (json.data.auth_token) {
       yield put(setAuthSuccess(json.data.auth_token));
     } else {

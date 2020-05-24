@@ -50,7 +50,7 @@ const reducer = (state = {}, action) => {
       };
 
     case AUTHENTICATION_FAILURE:
-      console.log("set failure", action);
+      
       return {
         ...state,
         loading: false,
