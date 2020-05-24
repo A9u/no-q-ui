@@ -23,7 +23,8 @@ const RegisterForm = ({ submitHandler, categories }) => {
     state: yup.string(),
     capacity: yup.number().required(),
     pincode: yup.string().required()
-    .length(6, 'Invalid pincode'),
+    .length(6, "Invalid pincode")
+    .matches('\\d{6}', 'Invalid pincode'),
     duration: yup.number().required(),
     opening_time: yup.string(),
     closing_time: yup.string(),
@@ -118,7 +119,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                 
                 <NqInputV
                   id="pincode"
-                  type="number"
+                  type="text"
                   label="Pincode"
                   formText="416003"
                   name="pincode"
