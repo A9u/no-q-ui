@@ -22,7 +22,8 @@ const RegisterForm = ({ submitHandler, categories }) => {
     city: yup.string(),
     state: yup.string(),
     capacity: yup.number().required(),
-    pincode: yup.string().required(),
+    pincode: yup.string().required()
+    .length(6, 'Invalid pincode'),
     duration: yup.number().required(),
     opening_time: yup.string(),
     closing_time: yup.string(),
@@ -116,30 +117,8 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   onPlaceSelected = {setFieldValue}/>
                 
                 <NqInputV
-                  id="city"
-                  type="text"
-                  label="City"
-                  formText="Pune"
-                  name="city"
-                  handleChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.city}
-                  error={touched.city && errors.city}
-                />
-                <NqInputV
-                  id="state"
-                  type="text"
-                  label="State"
-                  formText="Maharashtra"
-                  name="state"
-                  handleChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.state}
-                  error={touched.state && errors.state}
-                />
-                <NqInputV
                   id="pincode"
-                  type="text"
+                  type="number"
                   label="Pincode"
                   formText="416003"
                   name="pincode"
