@@ -9,7 +9,7 @@ import {
   FETCH_CATEGORIES,
   SET_CATEGORIES,
   LOG_IN_USER,
-  SET_INACTIVE_SLOTS,
+  SET_INACTIVE_SLOTS
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({

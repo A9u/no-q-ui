@@ -7,8 +7,10 @@ import NqTagSelect from "core-components/NqTagSelect";
 import { WEEK_DAYS, CATEGORIES } from "constants/optionsConstants";
 
 import { NqButtonSubmit } from "core-components/NqButton";
+import PlacesAutoCompleteSearchBox from "core-components/NqPlacesAutocompleteSearchBox";
 
 const RegisterForm = ({ submitHandler, categories }) => {
+  
   let optionCategories = categories.map((category) => ({
     value: category.id,
     label: category.code,
@@ -110,17 +112,9 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   error={touched.categories && errors.categories}
                   handleChange={setFieldValue}
                 />
-                <NqInputV
-                  id="address"
-                  type="text"
-                  label="Address"
-                  formText="Stark Towers"
-                  name="address"
-                  handleChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.address}
-                  error={touched.address && errors.address}
-                />
+                <PlacesAutoCompleteSearchBox id = "address" label= "Address" 
+                  onPlaceSelected = {setFieldValue}/>
+                
                 <NqInputV
                   id="city"
                   type="text"
