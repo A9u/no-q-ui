@@ -10,6 +10,8 @@ import {
   SET_CATEGORIES,
   LOG_IN_USER,
   SET_INACTIVE_SLOTS,
+  SET_STORES,
+  FETCH_STORES,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -59,4 +61,14 @@ export const logInUser = (user) => ({
 export const setInactiveSlots = (slots) => ({
   type: SET_INACTIVE_SLOTS,
   slots,
+});
+
+export const fetchStores = (filterParams) => ({
+  type: FETCH_STORES,
+  filterParams,
+});
+
+export const setStores = (stores) => ({
+  type: SET_STORES,
+  stores,
 });
