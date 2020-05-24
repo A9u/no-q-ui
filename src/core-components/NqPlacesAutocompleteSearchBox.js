@@ -9,10 +9,10 @@ const PlacesAutoCompleteSearchBox = (props) => {
                 {props.label}
             </Label>
             <Col md={props.textMd || 6}>
-            <ReactGoogleAutocomplete class = "w-100"
+            <ReactGoogleAutocomplete id= "address" class = "w-100" 
                 apiKey = {process.env.REACT_APP_GOOGLE_API_KEY}
-                onPlaceSelected={(place) => {
-                    props.onPlaceSelected(props.id, place.formatted_address, false)
+                onPlaceSelected={(place, input) => {
+                    props.onPlaceSelected(props.id, input.value , false)
                 }}
                 types={['establishment']}
                 componentRestrictions={{country: "in"}}
