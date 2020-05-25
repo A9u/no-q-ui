@@ -6,6 +6,7 @@ import LogInFormContainer from "store/LogInFormContainer";
 import SlotFormContainter from "store/SlotFormContainer";
 import StoreListContainer from "store/StoreListContainer";
 import AdminStoresContainer from "store/AdminStoresContainer";
+import SlotBookingContainer from "store/SlotBookingContainer";
 
 const NqRoute = () => {
   return (
@@ -27,6 +28,9 @@ const NqRoute = () => {
       </Route>
       <Route exact path="/admin/stores">
         <AdminStoresContainer />
+      </Route>
+      <Route exact path="/book_slots">
+        <SlotBookingContainer />
       </Route>
     </>
   );

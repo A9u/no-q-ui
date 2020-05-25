@@ -14,6 +14,8 @@ import {
   FETCH_STORES,
   FETCH_ADMIN_STORES,
   DISABLE_STORE,
+  FETCH_SLOTS,
+  CREATE_BOOKING,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -82,4 +84,19 @@ export const fetchAdminStores = () => ({
 export const disableStore = (id) => ({
   type: DISABLE_STORE,
   id,
+});
+
+export const fetchSlots = (filterParams) => ({
+  type: FETCH_SLOTS,
+  filterParams,
+});
+
+export const setSlots = (payload) => ({
+  type: SET_SLOTS,
+  payload,
+});
+
+export const createBooking = (booking) => ({
+  type: CREATE_BOOKING,
+  booking,
 });

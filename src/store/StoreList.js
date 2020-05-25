@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 import "./table-responsive.css";
 import NqButton from "core-components/NqButton";
@@ -12,6 +12,16 @@ const Store = (store, index, isAdmin, handleClick) => {
       <td>{store.category_names}</td>
       <td>{store.pincode}</td>
       <td>{store.code}</td>
+      {!isAdmin && (
+        <td>
+          <Link
+            className="btn btn-primary"
+            to={{ pathname: "/book_slots", state: { storeId: store.id } }}
+          >
+            Book
+          </Link>
+        </td>
+      )}
       {isAdmin && <td>{store.duration}</td>}
       {isAdmin && !store.deleted_at && (
         <td>

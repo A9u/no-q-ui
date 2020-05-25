@@ -44,6 +44,7 @@ const StoreListFilter = ({ submitHandler, categories }) => {
               }
               console.log(store);
               submitHandler(store);
+              setSubmitting(false);
             }}
           >
             {({

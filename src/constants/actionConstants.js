@@ -27,3 +27,7 @@ export const SET_STORES = "SET_STORES";
 export const FETCH_ADMIN_STORES = "FETCH_ADMIN_STORES";
 
 export const DISABLE_STORE = "DISABLE_STORE";
+
+export const FETCH_SLOTS = "FETCH_SLOTS";
+
+export const CREATE_BOOKING = "CREATE_BOOKING";

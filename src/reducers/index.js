@@ -76,6 +76,12 @@ const reducer = (state = {}, action) => {
         ...state,
         stores: action.stores,
       };
+    case SET_SLOTS:
+      return {
+        ...state,
+        todaySlots: action.payload.todays_available_slot,
+        tomorrowSlots: action.payload.tomorrows_slot,
+      };
     default:
       return state;
   }

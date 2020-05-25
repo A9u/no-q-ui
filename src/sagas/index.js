@@ -8,7 +8,15 @@ import {
 } from "redux-saga/effects";
 import { setAuthSuccess, setAuthFailure } from "actions";
 import { USERS_URL, SESSIONS_URL } from "constants/apiConstants";
-import { setStore, setStoreError, setCategories, setStores } from "actions";
+
+import {
+  setStore,
+  setStoreError,
+  setCategories,
+  setStores,
+  setSlots,
+} from "actions";
+
 import {
   REGISTER_STORE,
   FETCH_CATEGORIES,
@@ -18,6 +26,7 @@ import {
   FETCH_STORES,
   FETCH_ADMIN_STORES,
   DISABLE_STORE,
+  FETCH_SLOTS,
 } from "constants/actionConstants";
 import {
   NqSuccessNotification,
@@ -62,8 +71,6 @@ function* registerStore(store) {
   try {
     const json = yield call(authorizedPostApiCall, "/stores", store);
     if (json.data) {
-      console.log("response received");
-      console.log(json.data);
       yield put(setStore(json.data));
       yield call(NqSuccessNotification, json.message);
     } else {
@@ -81,8 +88,6 @@ function* fetchCategories() {
     const json = yield call(getJSON, response);
 
     if (json.data) {
-      console.log("categories fetched");
-      console.log(json.data);
       yield put(setCategories(json.data));
     }
   } catch (error) {
@@ -95,8 +100,6 @@ function* setInactiveSlots(slots) {
   try {
     const json = yield call(authorizedPostApiCall, "/slots/mark", slots);
     if (json.data) {
-      console.log("successfully set inactive");
-      console.log(json.data);
       yield call(NqSuccessNotification, json.message);
     }
   } catch (error) {
@@ -104,26 +107,10 @@ function* setInactiveSlots(slots) {
   }
 }
 
-function* watcher() {
-  yield takeLatest(REGISTER_STORE, registerStore);
-  yield takeLatest(FETCH_CATEGORIES, fetchCategories);
-  yield takeLatest(SET_INACTIVE_SLOTS, setInactiveSlots);
-  yield takeLatest(ADD_STORE_OWNER, addShopOwner);
-  yield takeLatest(LOG_IN_USER, logInUser);
-  yield takeLatest(FETCH_STORES, fetchStores);
-  yield takeLatest(FETCH_ADMIN_STORES, fetchAdminStores);
-  yield takeEvery(DISABLE_STORE, disableStore);
-}
-
-export default function* rootSaga() {
-  yield all([watcher()]);
-}
-
 function* addShopOwner(body) {
   try {
-    const json = yield PostApiCall(USERS_URL, body).then((response) => {
-      return response.json();
-    });
+    const response = yield call(PostApiCall, USERS_URL, body);
+    const json = yield call(getJSON, response);
 
     if (json.data.auth_token) {
       yield put(setAuthSuccess(json.data.auth_token));
@@ -139,9 +126,8 @@ function* addShopOwner(body) {
 function* logInUser(data) {
   try {
     var body = { user: data.user };
-    const json = yield PostApiCall(SESSIONS_URL, body).then((response) => {
-      return response.json();
-    });
+    const response = yield call(PostApiCall, SESSIONS_URL, body);
+    const json = yield call(getJSON, response);
 
     if (json.data.auth_token) {
       yield put(setAuthSuccess(json.data));
@@ -194,4 +180,53 @@ function* disableStore(data) {
     authorizedDeleteApiCall,
     "/admin/disable_store/" + data.id
   );
+}
+
+function* fetchSlots(data) {
+  console.log(data);
+  try {
+    const response = yield call(GetApiCall, "/slots", data.filterParams);
+    const json = yield call(getJSON, response);
+
+    if (json.data) {
+      console.log("stores fetched");
+      console.log(json.data);
+      yield put(setSlots(json.data));
+    }
+  } catch (error) {
+    console.log("fetching stores");
+    console.log(error);
+  }
+}
+
+function* createBooking(booking) {
+  try {
+    const response = yield call(PostApiCall, "/bookings", booking);
+    const json = yield call(getJSON, response);
+
+    if (json.data.auth_token) {
+      yield put(setAuthSuccess(json.data));
+      yield call(NqSuccessNotification, json.message);
+    } else {
+      yield call(NqErrorNotification, json.message);
+    }
+  } catch (error) {
+    yield call(NqErrorNotification, error);
+  }
+}
+
+function* watcher() {
+  yield takeLatest(REGISTER_STORE, registerStore);
+  yield takeLatest(FETCH_CATEGORIES, fetchCategories);
+  yield takeLatest(SET_INACTIVE_SLOTS, setInactiveSlots);
+  yield takeLatest(ADD_STORE_OWNER, addShopOwner);
+  yield takeLatest(LOG_IN_USER, logInUser);
+  yield takeLatest(FETCH_STORES, fetchStores);
+  yield takeLatest(FETCH_ADMIN_STORES, fetchAdminStores);
+  yield takeEvery(DISABLE_STORE, disableStore);
+  yield takeLatest(FETCH_SLOTS, fetchSlots);
+}
+
+export default function* rootSaga() {
+  yield all([watcher()]);
 }
