@@ -1,4 +1,11 @@
-import { put, takeLatest, all, call, select } from "redux-saga/effects";
+import {
+  put,
+  takeLatest,
+  takeEvery,
+  all,
+  call,
+  select,
+} from "redux-saga/effects";
 import { setAuthSuccess, setAuthFailure } from "actions";
 import { USERS_URL, SESSIONS_URL } from "constants/apiConstants";
 import { setStore, setStoreError, setCategories, setStores } from "actions";
@@ -9,12 +16,14 @@ import {
   ADD_STORE_OWNER,
   LOG_IN_USER,
   FETCH_STORES,
+  FETCH_ADMIN_STORES,
+  DISABLE_STORE,
 } from "constants/actionConstants";
 import {
   NqSuccessNotification,
   NqErrorNotification,
 } from "core-components/NqNotification";
-import { PostApiCall, GetApiCall, getJSON } from "apis";
+import { PostApiCall, GetApiCall, DeleteApiCall, getJSON } from "apis";
 import { getToken } from "../selectors";
 
 function* authorizedPostApiCall(url, body) {
@@ -25,6 +34,28 @@ function* authorizedPostApiCall(url, body) {
   const response = yield call(getJSON, json);
 
   return response;
+}
+
+function* authorizedGetApiCall(url, filterParams) {
+  const token = yield select(getToken);
+
+  const json = yield call(GetApiCall, url, filterParams, {
+    Authorization: token,
+  });
+
+  const response = yield call(getJSON, json);
+
+  return response;
+}
+
+function* authorizedDeleteApiCall(url) {
+  const token = yield select(getToken);
+
+  const json = yield call(DeleteApiCall, url, {
+    Authorization: token,
+  });
+
+  return json;
 }
 
 function* registerStore(store) {
@@ -80,6 +111,8 @@ function* watcher() {
   yield takeLatest(ADD_STORE_OWNER, addShopOwner);
   yield takeLatest(LOG_IN_USER, logInUser);
   yield takeLatest(FETCH_STORES, fetchStores);
+  yield takeLatest(FETCH_ADMIN_STORES, fetchAdminStores);
+  yield takeEvery(DISABLE_STORE, disableStore);
 }
 
 export default function* rootSaga() {
@@ -111,7 +144,7 @@ function* logInUser(data) {
     });
     debugger
     if (json.data.auth_token) {
-      yield put(setAuthSuccess(json.data.auth_token));
+      yield put(setAuthSuccess(json.data));
     } else {
       yield put(setAuthFailure(json.message));
       yield call(NqErrorNotification, json.message);
@@ -135,4 +168,30 @@ function* fetchStores(data) {
     console.log("fetching stores");
     console.log(error);
   }
+}
+
+function* fetchAdminStores(data) {
+  try {
+    const json = yield call(
+      authorizedGetApiCall,
+      "/admin/stores",
+      data.filterParams
+    );
+
+    if (json.data) {
+      console.log("stores fetched");
+      console.log(json.data);
+      yield put(setStores(json.data));
+    }
+  } catch (error) {
+    console.log("fetching stores");
+    console.log(error);
+  }
+}
+
+function* disableStore(data) {
+  const json = yield call(
+    authorizedDeleteApiCall,
+    "/admin/disable_store/" + data.id
+  );
 }

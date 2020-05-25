@@ -12,7 +12,7 @@ export const PostApiCall = (url, body, headers = {}) => {
   });
 };
 
-export const GetApiCall = (url, queryParams = {}) => {
+export const GetApiCall = (url, queryParams = {}, headers = {}) => {
   let getUrl = PORTAL_URL + url;
   if (queryParams) {
     let qs = new URLSearchParams();
@@ -25,6 +25,18 @@ export const GetApiCall = (url, queryParams = {}) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/no-q.com; version=1",
+      ...headers,
+    },
+  });
+};
+
+export const DeleteApiCall = (url, headers) => {
+  return fetch(PORTAL_URL + url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/no-q.com; version=1",
+      ...headers,
     },
   });
 };

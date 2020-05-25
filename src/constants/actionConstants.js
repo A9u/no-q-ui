@@ -23,3 +23,7 @@ export const SET_INACTIVE_SLOTS = "SET_INACTIVE_SLOTS";
 export const FETCH_STORES = "FETCH_STORES";
 
 export const SET_STORES = "SET_STORES";
+
+export const FETCH_ADMIN_STORES = "FETCH_ADMIN_STORES";
+
+export const DISABLE_STORE = "DISABLE_STORE";
