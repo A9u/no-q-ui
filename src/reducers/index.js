@@ -9,6 +9,7 @@ import {
   SET_CATEGORIES,
   LOG_IN_USER,
   SET_INACTIVE_SLOTS,
+  SET_STORES,
 } from "../constants/actionConstants";
 
 const reducer = (state = {}, action) => {
@@ -67,6 +68,11 @@ const reducer = (state = {}, action) => {
     case SET_INACTIVE_SLOTS:
       return {
         ...state,
+      };
+    case SET_STORES:
+      return {
+        ...state,
+        stores: action.stores,
       };
     default:
       return state;

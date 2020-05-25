@@ -5,7 +5,7 @@ import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import { NqButtonSubmit } from "core-components/NqButton";
 
-export const StoreOwnerSignUpForm = ({submitHandler }) => {
+export const StoreOwnerSignUpForm = ({ submitHandler }) => {
   let signUpSchema = yup.object().shape({
     username: yup
       .string()
@@ -60,6 +60,7 @@ export const StoreOwnerSignUpForm = ({submitHandler }) => {
                   onBlur={handleBlur}
                   value={values.username}
                   error={touched.username && errors.username}
+                  required={true}
                 />
                 <NqInputV
                   id="password"
@@ -71,6 +72,7 @@ export const StoreOwnerSignUpForm = ({submitHandler }) => {
                   onBlur={handleBlur}
                   value={values.password}
                   error={touched.password && errors.password}
+                  required={true}
                 />
                 <NqInputV
                   id="password_confirmation"
@@ -85,6 +87,7 @@ export const StoreOwnerSignUpForm = ({submitHandler }) => {
                     touched.password_confirmation &&
                     errors.password_confirmation
                   }
+                  required={true}
                 />
                 <NqButtonSubmit
                   id="submit"
