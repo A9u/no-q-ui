@@ -7,6 +7,9 @@ import NqTagSelect from "core-components/NqTagSelect";
 import { WEEK_DAYS } from "constants/optionsConstants";
 
 import { NqButtonSubmit } from "core-components/NqButton";
+
+import PlacesAutoCompleteSearchBox from "core-components/NqPlacesAutocompleteSearchBox";
+
 import { createOptions } from "utils";
 
 const RegisterForm = ({ submitHandler, categories }) => {
@@ -17,7 +20,9 @@ const RegisterForm = ({ submitHandler, categories }) => {
     city: yup.string(),
     state: yup.string(),
     capacity: yup.number().required(),
-    pincode: yup.string().required(),
+    pincode: yup.string().required()
+    .length(6, "Invalid pincode")
+    .matches('\\d{6}', 'Invalid pincode'),
     duration: yup.number().required(),
     opening_time: yup.string(),
     closing_time: yup.string(),
@@ -116,39 +121,9 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   touched={touched.categories}
                   required={true}
                 />
-                <NqInputV
-                  id="address"
-                  type="text"
-                  label="Address"
-                  formText="Stark Towers"
-                  name="address"
-                  handleChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.address}
-                  error={touched.address && errors.address}
-                />
-                <NqInputV
-                  id="city"
-                  type="text"
-                  label="City"
-                  formText="Pune"
-                  name="city"
-                  handleChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.city}
-                  error={touched.city && errors.city}
-                />
-                <NqInputV
-                  id="state"
-                  type="text"
-                  label="State"
-                  formText="Maharashtra"
-                  name="state"
-                  handleChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.state}
-                  error={touched.state && errors.state}
-                />
+                <PlacesAutoCompleteSearchBox id = "address" label= "Address" 
+                  onPlaceSelected = {setFieldValue}/>
+                
                 <NqInputV
                   id="pincode"
                   type="text"

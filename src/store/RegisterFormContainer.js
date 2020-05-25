@@ -10,7 +10,7 @@ const Form = ({
   store,
   error,
   createStoreHandler,
-  categories,
+  categories
 }) => {
   useEffect(() => {
     getCategories();
@@ -36,14 +36,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
+  
   return {
     createStoreHandler: (body) => {
       dispatch(registerStore(body));
     },
     getCategories: () => {
       dispatch(fetchCategories());
-    },
+    }
   };
+  
 };
 
 const RegisterFormContainer = connect(

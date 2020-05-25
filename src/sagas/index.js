@@ -37,7 +37,7 @@ import { getToken } from "../selectors";
 
 function* authorizedPostApiCall(url, body) {
   const token = yield select(getToken);
-
+  debugger;
   const json = yield call(PostApiCall, url, body, { Authorization: token });
 
   const response = yield call(getJSON, json);
