@@ -4,7 +4,7 @@ import { Form, Card, CardBody, CardHeader } from "reactstrap";
 import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import NqTagSelect from "core-components/NqTagSelect";
-import { WEEK_DAYS, CATEGORIES } from "constants/optionsConstants";
+import { WEEK_DAYS } from "constants/optionsConstants";
 
 import { NqButtonSubmit } from "core-components/NqButton";
 import { createOptions } from "utils";
