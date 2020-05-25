@@ -5,11 +5,16 @@ import { LogInForm } from "./LogInForm";
 import { logInUser } from "../actions";
 import { Redirect } from "react-router-dom";
 
-const logInForm = ({ error, authenticated, logInHandler, isAdmin }) => {
+const logInForm = ({ error, authenticated, logInHandler, isAdmin, storeRegistered }) => {
+  debugger
   if (isAdmin) {
     return <Redirect to={"/admin/stores"} />;
   } else if (authenticated) {
+    if (storeRegistered) {
+      return <Redirect to= {"/myStore"}/>
+    } else {
     return <Redirect to={"/register"} />;
+    }
   } else {
     return <LogInForm submitHandler={logInHandler} />;
   }

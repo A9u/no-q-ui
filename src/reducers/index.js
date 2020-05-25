@@ -76,6 +76,7 @@ const reducer = (state = {}, action) => {
         ...state,
         stores: action.stores,
       };
+    
     default:
       return state;
   }

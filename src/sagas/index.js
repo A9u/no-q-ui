@@ -18,6 +18,7 @@ import {
   FETCH_STORES,
   FETCH_ADMIN_STORES,
   DISABLE_STORE,
+  GET_STORE_DETAILS
 } from "constants/actionConstants";
 import {
   NqSuccessNotification,
@@ -112,6 +113,7 @@ function* watcher() {
   yield takeLatest(FETCH_STORES, fetchStores);
   yield takeLatest(FETCH_ADMIN_STORES, fetchAdminStores);
   yield takeEvery(DISABLE_STORE, disableStore);
+  yield takeLatest(GET_STORE_DETAILS, getStoreDetails);
 }
 
 export default function* rootSaga() {
@@ -191,4 +193,25 @@ function* disableStore(data) {
     authorizedDeleteApiCall,
     "/admin/disable_store/" + data.id
   );
+}
+
+
+function* getStoreDetails() {
+  try {
+    debugger
+    console.log("get store details")
+    const json = yield call(
+      authorizedGetApiCall,
+      "/stores/list"
+    );
+
+    if (json.data) {
+      console.log("store fetched");
+      console.log(json.data);
+      yield put(setStore(json.data));
+    }
+  } catch (error) {
+    console.log("fetching stores");
+    console.log(error);
+  }
 }

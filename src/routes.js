@@ -7,6 +7,8 @@ import SlotFormContainter from "store/SlotFormContainer";
 import HomePage from "store/HomePage";
 import StoreListContainer from "store/StoreListContainer";
 import AdminStoresContainer from "store/AdminStoresContainer";
+import ViewStoreDetailsContainer from "store/ViewStoreDetailsContainer";
+import { ViewStoreDetails } from "store/ViewStoreDetails";
 
 const NqRoute = () => {
   return (
@@ -29,6 +31,9 @@ const NqRoute = () => {
       </Route>
       <Route exact path="/admin/stores">
         <AdminStoresContainer />
+      </Route>
+      <Route exact path="/myStore">
+        <ViewStoreDetails/>
       </Route>
     </>
   );
