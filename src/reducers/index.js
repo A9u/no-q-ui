@@ -13,9 +13,6 @@ import {
 } from "../constants/actionConstants";
 
 const reducer = (state = {}, action) => {
-  console.log("inside reducer");
-  console.log(action);
-
   switch (action.type) {
     case SET_STORE:
       return {

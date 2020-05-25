@@ -44,7 +44,6 @@ const List = ({
   if (!authenticated) {
     return <Redirect to={"/login"} />;
   }
-  console.log(stores);
   return (
     <div className="fluid-container p-4">
       <h1> Store Listing </h1>

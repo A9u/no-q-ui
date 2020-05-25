@@ -24,7 +24,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     getMyStoreDetails: () => {
-      console.log("inside getmy tsore");
       dispatch(getStoreDetails());
     },
   };

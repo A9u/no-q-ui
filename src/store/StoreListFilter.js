@@ -42,7 +42,6 @@ const StoreListFilter = ({ submitHandler, categories }) => {
                   .map((category) => category.value)
                   .join(",");
               }
-              console.log(store);
               submitHandler(store);
             }}
           >

@@ -62,8 +62,6 @@ function* registerStore(store) {
   try {
     const json = yield call(authorizedPostApiCall, "/stores", store);
     if (json.data) {
-      console.log("response received");
-      console.log(json.data);
       yield put(setStore(json.data));
       yield call(NqSuccessNotification, json.message);
     } else {
@@ -81,13 +79,10 @@ function* fetchCategories() {
     const json = yield call(getJSON, response);
 
     if (json.data) {
-      console.log("categories fetched");
-      console.log(json.data);
       yield put(setCategories(json.data));
     }
   } catch (error) {
-    console.log("fetching categories");
-    console.log(error);
+    yield call(NqErrorNotification, error);
   }
 }
 
@@ -95,12 +90,10 @@ function* setInactiveSlots(slots) {
   try {
     const json = yield call(authorizedPostApiCall, "/slots/mark", slots);
     if (json.data) {
-      console.log("successfully set inactive");
-      console.log(json.data);
       yield call(NqSuccessNotification, json.message);
     }
   } catch (error) {
-    console.log("error while setting ");
+    yield call(NqErrorNotification, error);
   }
 }
 
@@ -159,13 +152,10 @@ function* fetchStores(data) {
     const json = yield call(getJSON, response);
 
     if (json.data) {
-      console.log("stores fetched");
-      console.log(json.data);
       yield put(setStores(json.data));
     }
   } catch (error) {
-    console.log("fetching stores");
-    console.log(error);
+    yield call(NqErrorNotification, error);
   }
 }
 
@@ -178,13 +168,10 @@ function* fetchAdminStores(data) {
     );
 
     if (json.data) {
-      console.log("stores fetched");
-      console.log(json.data);
       yield put(setStores(json.data));
     }
   } catch (error) {
-    console.log("fetching stores");
-    console.log(error);
+    yield call(NqErrorNotification, error);
   }
 }
 
@@ -197,16 +184,12 @@ function* disableStore(data) {
 
 function* getStoreDetails() {
   try {
-    console.log("get store details");
     const json = yield call(authorizedGetApiCall, "/stores/list");
 
     if (json.data) {
-      console.log("store fetched");
-      console.log(json.data);
       yield put(setStore(json.data));
     }
   } catch (error) {
-    console.log("fetching stores");
-    console.log(error);
+    yield call(NqErrorNotification, error);
   }
 }
