@@ -47,7 +47,9 @@ const reducer = (state = {}, action) => {
         ...state,
         loading: false,
         authenticated: true,
-        authToken: action.authToken,
+        authToken: action.data.auth_token,
+        isAdmin: action.data.is_admin,
+        storeRegistered: action.data.store_registered,
       };
 
     case AUTHENTICATION_FAILURE:

@@ -5,33 +5,35 @@ import { LogInForm } from "./LogInForm";
 import { logInUser } from "../actions";
 import { Redirect } from "react-router-dom";
 
-
-const logInForm = ({error, authenticated, logInHandler }) => {
-  if (authenticated) {
-    return <Redirect to = {"/register"}/>;
+const logInForm = ({ error, authenticated, logInHandler, isAdmin }) => {
+  if (isAdmin) {
+    return <Redirect to={"/admin/stores"} />;
+  } else if (authenticated) {
+    return <Redirect to={"/register"} />;
   } else {
-    return <LogInForm submitHandler={ logInHandler }/>
+    return <LogInForm submitHandler={logInHandler} />;
   }
 };
 
 const mapStateToProps = (state) => ({
-    error: state.error && state.error.authError,
-    authToken: state.authToken,
-    authenticated : state.authenticated
+  error: state.error && state.error.authError,
+  authToken: state.authToken,
+  authenticated: state.authenticated,
+  isAdmin: state.isAdmin,
+  storeRegistered: state.storeRegistered,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-      logInHandler: (body) => {
-        dispatch(logInUser(body));
-      },
-    };
+  return {
+    logInHandler: (body) => {
+      dispatch(logInUser(body));
+    },
+  };
 };
 
 const LogInFormContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(logInForm);
 
 export default LogInFormContainer;
-  

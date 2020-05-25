@@ -10,6 +10,7 @@ const NqButton = (props) => {
       id={props.id}
       className={props.className}
       onClick={props.handleClick}
+      {...props}
     >
       {props.label}
     </Button>
