@@ -12,12 +12,19 @@ export const PostApiCall = (url, body, headers = {}) => {
   });
 };
 
-export const GetApiCall = (url, body) => {
-  return fetch(PORTAL_URL + url, {
+export const GetApiCall = (url, queryParams = {}) => {
+  let getUrl = PORTAL_URL + url;
+  if (queryParams) {
+    let qs = new URLSearchParams();
+    Object.keys(queryParams).forEach((key) => qs.set(key, queryParams[key]));
+    getUrl = getUrl + "?" + qs.toString();
+  }
+
+  return fetch(getUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Accept" : "application/no-q.com; version=1",
+      Accept: "application/no-q.com; version=1",
     },
   });
 };

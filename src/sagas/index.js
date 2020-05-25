@@ -1,13 +1,14 @@
 import { put, takeLatest, all, call, select } from "redux-saga/effects";
 import { setAuthSuccess, setAuthFailure } from "actions";
 import { USERS_URL, SESSIONS_URL } from "constants/apiConstants";
-import { setStore, setStoreError, setCategories } from "actions";
+import { setStore, setStoreError, setCategories, setStores } from "actions";
 import {
   REGISTER_STORE,
   FETCH_CATEGORIES,
   SET_INACTIVE_SLOTS,
   ADD_STORE_OWNER,
   LOG_IN_USER,
+  FETCH_STORES,
 } from "constants/actionConstants";
 import {
   NqSuccessNotification,
@@ -18,7 +19,6 @@ import { getToken } from "../selectors";
 
 function* authorizedPostApiCall(url, body) {
   const token = yield select(getToken);
-  debugger
   const json = yield call(PostApiCall, url, body, { Authorization: token });
 
   const response = yield call(getJSON, json);
@@ -78,6 +78,7 @@ function* watcher() {
   yield takeLatest(SET_INACTIVE_SLOTS, setInactiveSlots);
   yield takeLatest(ADD_STORE_OWNER, addShopOwner);
   yield takeLatest(LOG_IN_USER, logInUser);
+  yield takeLatest(FETCH_STORES, fetchStores);
 }
 
 export default function* rootSaga() {
@@ -89,7 +90,6 @@ function* addShopOwner(body) {
     const json = yield PostApiCall(USERS_URL, body).then((response) => {
       return response.json();
     });
-    debugger
     if (json.data.auth_token) {
       yield put(setAuthSuccess(json.data.auth_token));
     } else {
@@ -107,7 +107,6 @@ function* logInUser(data) {
     const json = yield PostApiCall(SESSIONS_URL, body).then((response) => {
       return response.json();
     });
-    debugger
     if (json.data.auth_token) {
       yield put(setAuthSuccess(json.data.auth_token));
     } else {
@@ -116,5 +115,21 @@ function* logInUser(data) {
     }
   } catch (error) {
     yield put(setAuthFailure(error));
+  }
+}
+
+function* fetchStores(data) {
+  try {
+    const response = yield call(GetApiCall, "/stores", data.filterParams);
+    const json = yield call(getJSON, response);
+
+    if (json.data) {
+      console.log("stores fetched");
+      console.log(json.data);
+      yield put(setStores(json.data));
+    }
+  } catch (error) {
+    console.log("fetching stores");
+    console.log(error);
   }
 }

@@ -4,20 +4,15 @@ import { Form, Card, CardBody, CardHeader } from "reactstrap";
 import * as yup from "yup";
 import NqInputV from "core-components/NqInputV";
 import { NqButtonSubmit } from "core-components/NqButton";
-import {
-  NqSuccessNotification,
-  NqErrorNotification,
-} from "core-components/NqNotification";
 
-export const LogInForm = ({submitHandler }) => {
-  
+export const LogInForm = ({ submitHandler }) => {
   let logInSchema = yup.object().shape({
-    username: yup.string()
-    .required('Mobile is a required field')
-    .length(10, 'Invalid mobile number')
-    .matches('\\d{10}', 'Invalid mobile number'),
-    password: yup.string().required('Password is a required field'),
-
+    username: yup
+      .string()
+      .required("Mobile is a required field")
+      .length(10, "Invalid mobile number")
+      .matches("\\d{10}", "Invalid mobile number"),
+    password: yup.string().required("Password is a required field"),
   });
 
   return (
@@ -30,7 +25,7 @@ export const LogInForm = ({submitHandler }) => {
           <Formik
             initialValues={{
               username: "",
-              password: ""
+              password: "",
             }}
             validationSchema={logInSchema}
             onSubmit={(values) => {
@@ -44,7 +39,6 @@ export const LogInForm = ({submitHandler }) => {
               handleChange,
               handleBlur,
               handleSubmit,
-              
             }) => (
               <Form onSubmit={handleSubmit}>
                 <NqInputV
@@ -57,6 +51,7 @@ export const LogInForm = ({submitHandler }) => {
                   onBlur={handleBlur}
                   value={values.username}
                   error={touched.username && errors.username}
+                  required={true}
                 />
                 <NqInputV
                   id="password"
@@ -68,6 +63,7 @@ export const LogInForm = ({submitHandler }) => {
                   onBlur={handleBlur}
                   value={values.password}
                   error={touched.password && errors.password}
+                  required={true}
                 />
                 <NqButtonSubmit
                   id="submit"
@@ -83,4 +79,4 @@ export const LogInForm = ({submitHandler }) => {
       </CardBody>
     </Card>
   );
-}
+};

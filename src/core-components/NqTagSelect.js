@@ -12,8 +12,10 @@ const NqTagSelect = (props) => {
     props.handleBlur(props.name, true);
   };
 
+  let className = props.required ? "required" : "";
+
   return (
-    <FormGroup row>
+    <FormGroup row className={className}>
       <Label for={props.id} md={props.labelMd || 2}>
         {props.label}
       </Label>
@@ -21,13 +23,15 @@ const NqTagSelect = (props) => {
         <Select
           value={props.value}
           onChange={onChange}
+          errorText={props.touched && props.error}
           options={props.options}
           isMulti={props.multiple}
           name={props.name}
           defaultValue={props.defaultValue}
           onBlur={onBlur}
+          invalid={!!props.error}
         />
-        <FormFeedback> {props.error} </FormFeedback>
+        <FormFeedback className="d-block"> {props.error} </FormFeedback>
       </Col>
     </FormGroup>
   );
