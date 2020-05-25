@@ -21,13 +21,15 @@ const NqTagSelect = (props) => {
         <Select
           value={props.value}
           onChange={onChange}
+          errorText={props.touched && props.error}
           options={props.options}
           isMulti={props.multiple}
           name={props.name}
           defaultValue={props.defaultValue}
           onBlur={onBlur}
+          invalid={!!props.error}
         />
-        <FormFeedback> {props.error} </FormFeedback>
+        <FormFeedback className="d-block"> {props.error} </FormFeedback>
       </Col>
     </FormGroup>
   );

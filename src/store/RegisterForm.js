@@ -52,7 +52,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
               capacity: 1,
               opening_time: "09:00",
               closing_time: "18:00",
-              categories: [optionCategories[0] || []],
+              categories: [],
               available_days: WEEK_DAYS,
             }}
             validationSchema={schema}
@@ -106,6 +106,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   defaultValue={[optionCategories[0]]}
                   error={touched.categories && errors.categories}
                   handleChange={setFieldValue}
+                  touched={touched.categories}
                 />
                 <NqInputV
                   id="address"
