@@ -4,12 +4,14 @@ import SignUpFormContainer from "./store/StoreOwnerSignUpFormContainer";
 import RegisterFormContainer from "./store/RegisterFormContainer";
 import LogInFormContainer from "store/LogInFormContainer";
 import SlotFormContainter from "store/SlotFormContainer";
+import HomePage from "store/HomePage";
 import StoreListContainer from "store/StoreListContainer";
 import AdminStoresContainer from "store/AdminStoresContainer";
 
 const NqRoute = () => {
   return (
     <>
+      <Route exact path="/"> <HomePage/></Route> 
       <Route exact path="/login">
         <LogInFormContainer />
       </Route>

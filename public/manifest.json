@@ -1,6 +1,7 @@
 {
-  "short_name": "No-Q",
+  "short_name": "NQ",
   "name": "No-Q",
+  "description": "Token management system for stores. Enjoy hassle-free shopping, while maintaining social distancing.",
   "icons": [
     {
       "src": "favicon.ico",
