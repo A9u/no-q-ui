@@ -12,8 +12,10 @@ const NqTagSelect = (props) => {
     props.handleBlur(props.name, true);
   };
 
+  let className = props.required ? "required" : "";
+
   return (
-    <FormGroup row>
+    <FormGroup row className={className}>
       <Label for={props.id} md={props.labelMd || 2}>
         {props.label}
       </Label>

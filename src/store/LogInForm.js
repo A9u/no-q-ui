@@ -51,6 +51,7 @@ export const LogInForm = ({ submitHandler }) => {
                   onBlur={handleBlur}
                   value={values.username}
                   error={touched.username && errors.username}
+                  required={true}
                 />
                 <NqInputV
                   id="password"
@@ -62,6 +63,7 @@ export const LogInForm = ({ submitHandler }) => {
                   onBlur={handleBlur}
                   value={values.password}
                   error={touched.password && errors.password}
+                  required={true}
                 />
                 <NqButtonSubmit
                   id="submit"
