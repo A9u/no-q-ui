@@ -53,7 +53,6 @@ const reducer = (state = {}, action) => {
       };
 
     case AUTHENTICATION_FAILURE:
-      
       return {
         ...state,
         loading: false,
@@ -76,6 +75,7 @@ const reducer = (state = {}, action) => {
         ...state,
         stores: action.stores,
       };
+
     default:
       return state;
   }

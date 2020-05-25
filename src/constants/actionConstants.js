@@ -24,6 +24,8 @@ export const FETCH_STORES = "FETCH_STORES";
 
 export const SET_STORES = "SET_STORES";
 
+export const GET_STORE_DETAILS = "GET_STORE_DETAILS";
+
 export const FETCH_ADMIN_STORES = "FETCH_ADMIN_STORES";
 
 export const DISABLE_STORE = "DISABLE_STORE";
