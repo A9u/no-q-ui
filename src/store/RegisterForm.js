@@ -21,7 +21,15 @@ const RegisterForm = ({ submitHandler, categories }) => {
     duration: yup.number().required(),
     opening_time: yup.string(),
     closing_time: yup.string(),
-    available_days: yup.array().required(),
+    available_days: yup
+      .array()
+      .required()
+      .of(
+        yup.object().shape({
+          label: yup.string().required(),
+          value: yup.string().required(),
+        })
+      ),
     categories: yup
       .array()
       .required()
@@ -62,12 +70,10 @@ const RegisterForm = ({ submitHandler, categories }) => {
                 (category) => category.value
               );
               let daysIndex = store.available_days.map((day) => day.value);
-              console.log(daysIndex);
               store.available_days = WEEK_DAYS.map((day) =>
                 daysIndex.includes(day.value) ? 1 : 0
               ).join("");
 
-              console.log(store);
               submitHandler(store);
             }}
           >
@@ -93,6 +99,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   onBlur={handleBlur}
                   value={values.name}
                   error={touched.name && errors.name}
+                  required={true}
                 />
 
                 <NqTagSelect
@@ -107,6 +114,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   error={touched.categories && errors.categories}
                   handleChange={setFieldValue}
                   touched={touched.categories}
+                  required={true}
                 />
                 <NqInputV
                   id="address"
@@ -151,6 +159,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   onBlur={handleBlur}
                   value={values.pincode}
                   error={touched.pincode && errors.pincode}
+                  required={true}
                 />
                 <NqInputV
                   id="opening_time"
@@ -161,6 +170,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   onBlur={handleBlur}
                   value={values["opening_time"]}
                   error={touched["opening_time"] && errors["opening_time"]}
+                  required={true}
                 />
                 <NqInputV
                   id="closing_time"
@@ -171,6 +181,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   onBlur={handleBlur}
                   value={values["closing_time"]}
                   error={touched["closing_time"] && errors["closing_time"]}
+                  required={true}
                 />
                 <NqInputV
                   id="duration"
@@ -182,6 +193,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   onBlur={handleBlur}
                   value={values.duration}
                   error={touched.duration && errors.duration}
+                  required={true}
                 />
                 <NqInputV
                   id="capacity"
@@ -193,6 +205,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   onBlur={handleBlur}
                   value={values.capacity}
                   error={touched.capacity && errors.capacity}
+                  required={true}
                 />
                 <NqTagSelect
                   id="available_days"
@@ -205,6 +218,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   defaultValue={WEEK_DAYS}
                   error={touched["available_days"] && errors["available_days"]}
                   handleChange={setFieldValue}
+                  required={true}
                 />
                 <NqButtonSubmit
                   id="submit"

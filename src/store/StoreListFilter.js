@@ -69,6 +69,7 @@ const StoreListFilter = ({ submitHandler, categories }) => {
                   onBlur={handleBlur}
                   value={values.pincode}
                   error={touched.pincode && errors.pincode}
+                  required={true}
                 />
                 <NqTagSelect
                   id="category_ids"
