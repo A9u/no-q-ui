@@ -18,7 +18,7 @@ import {
   FETCH_STORES,
   FETCH_ADMIN_STORES,
   DISABLE_STORE,
-  GET_STORE_DETAILS
+  GET_STORE_DETAILS,
 } from "constants/actionConstants";
 import {
   NqSuccessNotification,
@@ -195,15 +195,10 @@ function* disableStore(data) {
   );
 }
 
-
 function* getStoreDetails() {
   try {
-    debugger
-    console.log("get store details")
-    const json = yield call(
-      authorizedGetApiCall,
-      "/stores/list"
-    );
+    console.log("get store details");
+    const json = yield call(authorizedGetApiCall, "/stores/list");
 
     if (json.data) {
       console.log("store fetched");

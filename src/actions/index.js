@@ -14,7 +14,7 @@ import {
   FETCH_STORES,
   FETCH_ADMIN_STORES,
   DISABLE_STORE,
-  GET_STORE_DETAILS
+  GET_STORE_DETAILS,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -86,5 +86,5 @@ export const disableStore = (id) => ({
 });
 
 export const getStoreDetails = () => ({
-  type: GET_STORE_DETAILS
+  type: GET_STORE_DETAILS,
 });
