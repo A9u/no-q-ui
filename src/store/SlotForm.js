@@ -25,7 +25,7 @@ const SlotForm = (props) => {
         Your store Code is <b>{props.code}</b>
       </h1>
       <p>
-        Please confirm and select your store's slots:-
+        Select your store's slots and click confirm:-
         <NqButton
           className="float-right"
           label="Confirm"
