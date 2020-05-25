@@ -1,7 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
 import { Nav, NavItem, NavLink, Button, InputGroup, Form, FormGroup, Col, Card, CardHeader, CardBody, CardTitle, Container, Row, CardSubtitle, CardText } from 'reactstrap';
-//import '../styles/navbar.scss';
 import logo from "assets/noQ-logo.png";
 import choose_pincode from "assets/choose_pincode.png";
 import choose_category from "assets/choose_category.png";
@@ -9,7 +7,7 @@ import choose_shop from "assets/choose_shop.png";
 import choose_slot from "assets/choose_slot.png";
 import Navbar from 'react-bootstrap/Navbar';
 
-const NqNavBar = () => {
+const HomePage = () => {
   return (<>
     <div>
     <Navbar className="bg-dark text-light font-weight-bolder">
@@ -98,4 +96,4 @@ const NqNavBar = () => {
     );
   };
   
-  export default NqNavBar;
+  export default HomePage;
