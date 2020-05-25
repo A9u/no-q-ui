@@ -12,6 +12,8 @@ import {
   SET_INACTIVE_SLOTS,
   SET_STORES,
   FETCH_STORES,
+  FETCH_ADMIN_STORES,
+  DISABLE_STORE,
 } from "../constants/actionConstants";
 
 export const registerStore = (store) => ({
@@ -34,9 +36,9 @@ export const addStoreOwner = (owner) => ({
   user: owner,
 });
 
-export const setAuthSuccess = (authToken) => ({
+export const setAuthSuccess = (data) => ({
   type: AUTHENTICATION_SUCCESS,
-  authToken: authToken,
+  data,
 });
 
 export const setAuthFailure = (error) => ({
@@ -71,4 +73,13 @@ export const fetchStores = (filterParams) => ({
 export const setStores = (stores) => ({
   type: SET_STORES,
   stores,
+});
+
+export const fetchAdminStores = () => ({
+  type: FETCH_ADMIN_STORES,
+});
+
+export const disableStore = (id) => ({
+  type: DISABLE_STORE,
+  id,
 });

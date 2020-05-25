@@ -8,7 +8,6 @@ import NqTagSelect from "core-components/NqTagSelect";
 import { NqButtonSubmit } from "core-components/NqButton";
 
 import { createOptions } from "utils";
-import { CATEGORIES } from "constants/optionsConstants";
 
 const StoreListFilter = ({ submitHandler, categories }) => {
   let optionCategories = createOptions(categories || []);
