@@ -4,10 +4,10 @@ import { useLocation } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import Fingerprint2 from "fingerprintjs2";
 
-import { fetchSlots } from "actions";
+import { fetchSlots, createBooking } from "actions";
 import SlotBooking from "./SlotBooking";
 
-const Form = ({ todaySlots, getSlots, tomorrowSlots, bookslot }) => {
+const Form = ({ todaySlots, getSlots, tomorrowSlots, bookSlot }) => {
   const location = useLocation();
   let storeId = location.state.storeId;
   let [deviceId, setDeviceId] = useState("");
@@ -25,8 +25,6 @@ const Form = ({ todaySlots, getSlots, tomorrowSlots, bookslot }) => {
       });
     }, 500);
   }, [storeId]);
-
-  let [inActiveSlots, setInactiveState] = useState([]);
 
   let confirmSlot = (event) => {
     console.log(event.target.dataset);
@@ -49,8 +47,7 @@ const Form = ({ todaySlots, getSlots, tomorrowSlots, bookslot }) => {
 
   const book = (slotId) => {
     let body = { slot_id: slotId, store_id: storeId, device_id: deviceId };
-    console.log(body);
-    //bookslot
+    bookSlot(body);
   };
 
   return (
@@ -69,7 +66,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   bookSlot: (body) => {
-    dispatch();
+    dispatch(createBooking(body));
   },
   getSlots: (filterParams) => {
     dispatch(fetchSlots(filterParams));

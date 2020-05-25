@@ -27,6 +27,7 @@ import {
   FETCH_ADMIN_STORES,
   DISABLE_STORE,
   FETCH_SLOTS,
+  CREATE_BOOKING,
 } from "constants/actionConstants";
 import {
   NqSuccessNotification,
@@ -199,13 +200,16 @@ function* fetchSlots(data) {
   }
 }
 
-function* createBooking(booking) {
+function* createBooking(data) {
   try {
-    const response = yield call(PostApiCall, "/bookings", booking);
+    const response = yield call(
+      PostApiCall,
+      "/bookings/book_slot",
+      data.booking
+    );
     const json = yield call(getJSON, response);
 
-    if (json.data.auth_token) {
-      yield put(setAuthSuccess(json.data));
+    if (json.data) {
       yield call(NqSuccessNotification, json.message);
     } else {
       yield call(NqErrorNotification, json.message);
@@ -225,6 +229,7 @@ function* watcher() {
   yield takeLatest(FETCH_ADMIN_STORES, fetchAdminStores);
   yield takeEvery(DISABLE_STORE, disableStore);
   yield takeLatest(FETCH_SLOTS, fetchSlots);
+  yield takeLatest(CREATE_BOOKING, createBooking);
 }
 
 export default function* rootSaga() {
