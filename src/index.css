@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f1f1f1 !important;
 }
 
 code {
@@ -15,4 +16,8 @@ code {
 .form-group.required .col-form-label:after {
   content: "*";
   color: red;
+}
+
+img.step {
+  width: 95%
 }
