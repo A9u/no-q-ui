@@ -5,6 +5,7 @@ import choose_pincode from "assets/choose_pincode.png";
 import choose_category from "assets/choose_category.png";
 import choose_shop from "assets/choose_shop.png";
 import choose_slot from "assets/choose_slot.png";
+import init_message from "assets/init_message.png";
 import Navbar from 'react-bootstrap/Navbar';
 
 const HomePage = () => {
@@ -29,8 +30,9 @@ const HomePage = () => {
     <Card className = "border-0">
           <CardTitle><h4>What is NoQ?</h4></CardTitle>
           <CardBody>
-                <p>NoQ is a platform which makes day-to-day shopping easy while folowing social distancing. the consumers can book a slot for shopping in stores registered on NoQ platform.<br/>
-                The platform ensures the bookings do not exceed given capacity by store owner so user can enjoy the little trip to the store with safety.
+                <p>NoQ is a platform which makes day-to-day shopping easy while following social distancing. The user can book a slot for shopping in stores registered on NoQ platform.
+                On successful booking, user will receive an e-Token which can be presented at store on visit.<br/> 
+                The platform ensures the bookings do not exceed given capacity by store owner so users can enjoy their little trip to the store with safety.
                 </p></CardBody>
           </Card>
     <Card className = "border-0" >
@@ -39,9 +41,17 @@ const HomePage = () => {
           <CardBody>
           <div className="container-fluid">
             <Row>
-                <Col md={3} xs={12}><img src={choose_pincode}/>
+            <Col md={3} xs={12}><h5 className="text-center">Step 1</h5><br/><img src={init_message}/>
+                <br/><br/>
+                <p>
+                Save the contact <b>917834811114</b> on your phone and send a WhatsApp to it as <b>PROXY ShopTok</b>
                 <br/>
-                <h5>Step 1</h5><br/>
+                You will receive a welcome message from NoQ platform. Initiate the conversation.
+                </p>
+                <br/>
+                </Col>
+                <Col md={3} xs={12}><h5 className="text-center">Step 2</h5><br/><img src={choose_pincode}/>
+                <br/><br/>
                 <p><b>
                 Provide your area pincode </b>  to receive the available shops for slot booking, once you receive Welcome message from platform.
                 <br/>
@@ -49,18 +59,16 @@ const HomePage = () => {
                 </p>
                 <br/>
                 </Col>
-                <Col md={3} xs={12}><img src={choose_category}/>
-                <br/>
-                <h5>Step 2</h5><br/>
+                <Col md={3} xs={12}><h5 className= "text-center">Step 3</h5><br/><img src={choose_category}/>
+                <br/><br/>
                 <p>
                 <b>Select your category and send the category code</b>
                 <br/>
                 Based on selected pincode and category, you will receive list of shops along with their codes available for slot booking.
                 </p>
-                <br/>
+                <br/><br/>
                 </Col>
-                <Col md={3} xs={12}><img src={choose_shop}/><br/>
-                <h5>Step 3</h5><br/>
+                <Col md={3} xs={12}><h5 className= "text-center">Step 4</h5><br/><img src={choose_shop}/><br/><br/>
                 <p>
                 <b>To choose a shop, send first three characters of the shop code.</b>
                 <br/>
@@ -68,8 +76,8 @@ const HomePage = () => {
                 </p>
                 <br/>
                 </Col>
-                <Col md={3} xs={12}><img src={choose_slot}/><br/>
-                <h5>Step 4</h5><br/>
+                <Col md={3} xs={12}><h5 className= "text-center">Step 5</h5><br/><img src={choose_slot}/><br/>
+                <br/>
                 <p>
                 <b>To select a slot from given list, send slot Id.</b>
                 <br/>
