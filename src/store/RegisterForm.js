@@ -7,13 +7,10 @@ import NqTagSelect from "core-components/NqTagSelect";
 import { WEEK_DAYS, CATEGORIES } from "constants/optionsConstants";
 
 import { NqButtonSubmit } from "core-components/NqButton";
+import { createOptions } from "utils";
 
 const RegisterForm = ({ submitHandler, categories }) => {
-  let optionCategories = categories.map((category) => ({
-    value: category.id,
-    label: category.code,
-  }));
-
+  let optionCategories = createOptions(categories);
   let schema = yup.object().shape({
     name: yup.string().required(),
     address: yup.string().required(),
@@ -55,7 +52,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
               capacity: 1,
               opening_time: "09:00",
               closing_time: "18:00",
-              categories: [optionCategories[0] || CATEGORIES[0]],
+              categories: [],
               available_days: WEEK_DAYS,
             }}
             validationSchema={schema}
@@ -109,6 +106,7 @@ const RegisterForm = ({ submitHandler, categories }) => {
                   defaultValue={[optionCategories[0]]}
                   error={touched.categories && errors.categories}
                   handleChange={setFieldValue}
+                  touched={touched.categories}
                 />
                 <NqInputV
                   id="address"
