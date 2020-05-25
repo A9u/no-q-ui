@@ -50,7 +50,7 @@ export const fetchCategories = () => ({
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
-  categories,
+  categories: categories,
 });
 
 export const logInUser = (user) => ({
@@ -60,7 +60,7 @@ export const logInUser = (user) => ({
 
 export const setInactiveSlots = (slots) => ({
   type: SET_INACTIVE_SLOTS,
-  slots,
+  slots: slots,
 });
 
 export const fetchStores = (filterParams) => ({
