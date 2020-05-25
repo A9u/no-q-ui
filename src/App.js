@@ -5,12 +5,13 @@ import ReactNotification from "react-notifications-component";
 
 import NqRoute from "./routes.js";
 
+
 function App() {
   return (
     
     <BrowserRouter>
       <ReactNotification/>
-      <NqRoute />
+       <NqRoute />
       <div className="App">
       </div>
     </BrowserRouter>
